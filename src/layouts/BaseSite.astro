@@ -1,0 +1,138 @@
+--- 
+import "@fontsource-variable/nunito-sans"
+import "@fontsource-variable/source-code-pro"
+import { PAGE_TITLE } from "../constants"
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Programming guides">
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={ Astro.generator } />
+		<link rel="alternate" type="application/rss+xml" title={ PAGE_TITLE }
+			  href="/rss.xml" />
+
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="stylesheet" type="text/css"
+			  href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css" />
+
+		<title>{title}</title>
+	</head>
+	<body>
+		<nav class="navbar">
+			<h1 class="brand"><a href="/">lotta dev</a></h1>
+
+			<ul>
+				<li><a href="/about">about</a></li>
+			</ul>
+		</nav>
+		
+		<main style="margin-block: 1em;">
+			<slot />
+		</main>
+
+		<footer class="footer">
+			<p>
+				&copy; 2023. Angel Carias.
+				<a href="/about#legal">
+					view license
+				</a>
+			</p>
+			<div class="links">
+				<a href="https://github.com/aescarias/lotta-dev" target="_blank" rel="noopener noreferrer">
+					<i class="ph ph-github-logo" style="font-size: 1.25rem"/>
+					github
+				</a>
+
+				<a href="/rss.xml" target="_blank" rel="noopener noreferrer">
+					<i class="ph ph-rss-simple" style="font-size: 1.25rem"/>
+					rss
+				</a>
+			</div>
+		</footer>
+	</body>
+</html>
+
+<style is:global>
+	:root {
+		--accentColor: #3d9bd1;
+		--bgDark: #1a1b26;
+		--fgDark: white;
+	}
+	body {
+		padding: 0;
+		font-family: Nunito, sans-serif;
+		font-size: 1.2rem;
+		background-color: var(--bgDark);
+		color: var(--fgDark);
+
+		text-rendering: optimizeLegibility;
+		font-synthesis: none;
+
+        max-width: clamp(65vw, 70vw, 75vw);
+		margin: auto;
+	}
+	
+	.brand a {
+		color: var(--accentColor);
+		text-decoration: none;
+	}
+
+	h1, pre, code, .mono {
+		font-family: "Source Code Pro", monospace;
+	}
+
+	.navbar {
+		display: flex;
+		gap: 1em;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.navbar ul {
+		display: flex;
+		gap: 1.2em;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	
+	a {
+		color: #326ded;
+		text-decoration: none;
+	}
+
+	a:hover {
+		opacity: 85%;
+	}
+
+	.footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.footer .links {
+		display: flex;
+		gap: 0.75em;
+	}
+
+	@media screen and (max-width: 500px) {
+		.navbar { 
+			flex-direction: column; 
+			justify-content: center;
+			align-items: center;
+			gap: 0;
+		}
+		.footer { flex-direction: column; }
+	}
+</style>

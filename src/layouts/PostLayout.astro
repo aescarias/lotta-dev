@@ -1,0 +1,49 @@
+---
+import { format } from "date-fns"
+import BaseSite from "./BaseSite.astro"
+
+const { frontmatter, readingTime } = Astro.props
+---
+
+<BaseSite title={ frontmatter.title }>
+    <h1 class="blog-title">{ frontmatter.title }</h1>
+    <p class="mono" style="color: #8e97aa;">
+        published <time>{ format(frontmatter.published, "EEEE, MMMM dd, yyyy") }</time> ·
+        { readingTime } minute read
+    </p>
+    
+    <p class="mono" style="color: #8e97aa">
+        // { frontmatter.description }
+    </p>
+
+    <main class="blog-content">
+        <slot />
+    </main>
+</BaseSite>
+
+<style>
+    .blog-title {
+        font-size: 2rem;
+    }
+</style>
+
+<style is:global>
+    .blkquote, .blog-content blockquote {
+        border-left: 5px solid var(--accentColor);
+        background: #282932;
+        padding-inline: 1.25em;
+        padding-block: 0.3em;
+        margin-inline: 1.5em;
+    }
+    .blog-content p {
+        text-align: justify;
+    }
+    .blog-content pre {
+        padding: 0.75em;
+        border-radius: 5px;
+    }
+    .blog-content :not(pre) code {
+        background: #424242;
+        padding: 0.15em;
+    }
+</style>

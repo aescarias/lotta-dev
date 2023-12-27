@@ -1,0 +1,45 @@
+---
+import BaseSite from "../layouts/BaseSite.astro"
+import { getCollection, type CollectionEntry } from "astro:content"
+import { formatDistance } from "date-fns"
+
+const posts = await getCollection("posts")
+
+function sortByLatest(posts: CollectionEntry<'posts'>[]) {
+	return posts.toSorted((first, second) => 
+		second.data.published.getTime() - first.data.published.getTime())
+}
+---
+
+<BaseSite title="Lotta Dev">
+	<h2 class="mono">
+		latest posts
+	</h2>
+
+	<section class="articles">
+		{ sortByLatest(posts).map((post) => 
+			<article class="blog-article">
+				<a href={ `/posts/${post.slug}` }>{ post.data.title }</a>
+				<p style="color: #8e97aa">// published <time>
+					{ formatDistance(post.data.published, new Date(), { addSuffix: true }) }
+				</time></p>
+				<p>{ post.data.description }</p>
+			</article>
+		) }
+	</section>
+</BaseSite>
+
+<style>
+	.articles {
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+	}
+
+	.blog-article {
+		padding: 0.5em;
+		background: #282a30;
+	}
+	.blog-article a { font-size: 1.25rem; }
+	.blog-article p { margin: 0.5em; }
+</style>
