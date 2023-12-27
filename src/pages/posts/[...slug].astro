@@ -16,6 +16,8 @@ function getReadingTime(content: string) {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+export const prerender = true;
 ---
 
 <PostLayout frontmatter={ entry.data } readingTime={ getReadingTime(entry.body) }>
