@@ -1,8 +1,9 @@
 ---
 import BaseSite from "../layouts/BaseSite.astro"
+import { WEB_TITLE } from "../constants";
 ---
 
-<BaseSite title="About Lotta Dev">
+<BaseSite title={ `About ${WEB_TITLE}` } description="A bit about the website and its author">
     <section id="site">
         <h1>About this site</h1>
 
@@ -49,7 +50,7 @@ import BaseSite from "../layouts/BaseSite.astro"
     </section>
 
     <section id="legal">
-        <h1>License</h1>
+        <h1>License & Attribution</h1>
 
         <p>
             Unless otherwise explicitly stated, all written content and attached assets
@@ -64,6 +65,16 @@ import BaseSite from "../layouts/BaseSite.astro"
             be found on <a href="https://github.com/aescarias/lotta-dev" target="_blank" rel="noopener noreferrer">
                 Github
             </a>. 
+        </p>
+
+        <p>
+            The icons used for the Github and RSS logo are part of the 
+            <a href="https://phosphoricons.com/" target="_blank" rel="noopener noreferrer">
+                Phosphor Icons
+            </a> set which is provided under the MIT License. 
+            
+            The fonts used are <b>Source Code Pro</b> and <b>Nunito</b> which are both
+            under the Open Font License.
         </p>
     </section>
 </BaseSite>
