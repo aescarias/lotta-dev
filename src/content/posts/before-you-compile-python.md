@@ -36,7 +36,7 @@ The issue with "freezing" tools is that most of them have to extract files to a 
 
 Other common issues include dealing with hidden imports (imports the tool could not detect), bundling C extensions, and depending on multiple files. These issues are things you will have to deal with manually and may be a headache if it is your first time using these tools.
 
-Nuitka tries to compile most of Python into C with the advantage of great performance gains but at the expense of accuracy. Nuitka is effectively a different Python interpreter -- it is not perfect and there are [known issues](https://github.com/Nuitka/Nuitka#typical-problems), specifically with some libraries like PyQt. It also faces some of the same issues pointed above.
+Nuitka tries to compile most of Python into C with the advantage of great performance gains but at the expense of accuracy. Nuitka is effectively a different Python runtime -- it is not perfect and there are [known issues](https://github.com/Nuitka/Nuitka#typical-problems), specifically with some libraries like PyQt. It also faces some of the same issues pointed above.
 
 ## So, what can I do?
 
