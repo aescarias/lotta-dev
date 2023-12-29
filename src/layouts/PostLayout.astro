@@ -5,7 +5,7 @@ import BaseSite from "./BaseSite.astro"
 const { frontmatter, readingTime } = Astro.props
 ---
 
-<BaseSite title={ frontmatter.title }>
+<BaseSite title={ frontmatter.title } description={ frontmatter.description }>
     <h1 class="blog-title">{ frontmatter.title }</h1>
     <p class="mono" style="color: #8e97aa;">
         published <time>{ format(frontmatter.published, "EEEE, MMMM dd, yyyy") }</time> ·

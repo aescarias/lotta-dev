@@ -5,7 +5,7 @@ import { getCollection } from "astro:content"
 import sanitizeHtml from "sanitize-html"
 import { marked } from "marked"
 
-import { PAGE_TITLE, PAGE_DESCRIPTION } from "../constants"
+import { WEB_TITLE, WEB_DESCRIPTION } from "../constants"
 
 function beautifyXML(xml: string, tab = '\t'): string { 
     let formatted = '';
@@ -35,8 +35,8 @@ export async function GET(context: APIContext) {
     }))
 
     const doc = await getRssString({
-        title: PAGE_TITLE,
-        description: PAGE_DESCRIPTION,
+        title: WEB_TITLE,
+        description: WEB_DESCRIPTION,
         site: context.site || new URL("https://lotta.pages.dev"),
         stylesheet: "/rss/feed.xsl",
         items: await Promise.all(rssItems),

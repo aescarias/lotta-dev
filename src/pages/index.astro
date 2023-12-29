@@ -2,6 +2,7 @@
 import BaseSite from "../layouts/BaseSite.astro"
 import { getCollection, type CollectionEntry } from "astro:content"
 import { formatDistance } from "date-fns"
+import { WEB_TITLE, WEB_DESCRIPTION } from "../constants"
 
 const posts = await getCollection("posts")
 
@@ -11,7 +12,7 @@ function sortByLatest(posts: CollectionEntry<'posts'>[]) {
 }
 ---
 
-<BaseSite title="Lotta Dev">
+<BaseSite title={ WEB_TITLE } description={ WEB_DESCRIPTION }>
 	<h2 class="mono">
 		latest posts
 	</h2>
