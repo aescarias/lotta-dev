@@ -28,13 +28,13 @@ This is because antivirus software flag executables based on patterns or behavio
 
 ### Python was not designed for this
 
-CPython (the standard implementation of Python) does not compile to machine code, so the solutions out there will be hacky. "Freezing" tools like PyInstaller or ``briefcase`` bundle the CPython runtime and the standard library with the advantage of their incredible portability and ease of use.
+CPython (the standard implementation of Python) does not compile to machine code and a lot of its features (notably, `exec()` and `eval()`) can make this harder, so the solutions out there will be hacky. "Freezing" tools like PyInstaller or ``briefcase`` bundle the CPython runtime and the standard library with the advantage of their incredible portability and ease of use.
 
 The issue with "freezing" tools is that most of them have to extract files to a temporary directory. This not only means that your application needs to have write access to the filesystem (even if your application doesn't directly depend on it), it also means that we now  depend on I/O speed, which can fluctuate. Some users might have to wait a few seconds before they see a window and it may put off some of them.
 
 > A notable exception is [PyOxidizer](https://pyoxidizer.readthedocs.io/en/stable/pyoxidizer.html). The binaries it generates are compiled from Rust and this code acts similarly to the "bootloader" you'd find in PyInstaller. However, rather than writing to disk, it imports Python modules from memory which is much faster.
 
-Other common issues include dealing with hidden imports (imports the tool could not detect), bundling C extensions, and depending on multiple files. These issues are things you will have to deal with manually and may be a headache if it is your first time using these tools.
+Other common issues include dealing with hidden imports (imports the tool could not detect), bundling C extensions (most performant Python libraries are written in C or other languages), and depending on multiple files. These issues are things you will have to deal with manually and may be a headache if it is your first time using these tools.
 
 Nuitka tries to compile most of Python into C with the advantage of great performance gains but at the expense of accuracy. Nuitka is effectively a different Python runtime -- it is not perfect and there are [known issues](https://github.com/Nuitka/Nuitka#typical-problems), specifically with some libraries like PyQt. It also faces some of the same issues pointed above.
 
@@ -44,18 +44,18 @@ Nuitka tries to compile most of Python into C with the advantage of great perfor
 
 - You'll have to tell users about possible false positives. You may also need to contact AV vendors directly so they can mark your file as safe. However, if your application targets a small audience or isn't downloaded often, you'll likely have to do this for each release of your software.
 - If using PyInstaller, a hacky solution I have heard *might* work is to [recompile its bootloader](https://www.pyinstaller.org/en/stable/bootloader-building.html). The bootloader is another binary written in C which is responsible for extracting and running your application once it's compiled. Recompiling does require some work and it is not guaranteed to be effective.
-- Another factor that can lead to detections is your file's reputation. **Code signing**, although costly, can help in establishing that reputation and helping guarantee its integrity (has it been tampered) and authenticity (where is this from).
+- Another factor that can lead to detections is your file's reputation. **Code signing**, although costly, can help in establishing that reputation and ensuring its integrity (has it been tampered) and authenticity (where is this from).
   - If your app gets popular enough, it may be detected by less engines as your app's reputation increases and as other people report false positives.
 
 ### If you prefer to use Python
 
 The simplest and easiest solution is just **not using these tools at all**. Telling your users to install Python is probably the best of all the options here.
 
-> If your users are not tech savvy, you can easily create an installer through Inno, NSIS, and similar. With an installer, you can simply bundle a Python interpreter with your code in the same way PyInstaller would. In fact, there's a tool called [pynsist](https://github.com/takluyver/pynsist) that does this.
+If your users are not tech savvy, you can easily create an installer through Inno, NSIS, and similar. With an installer, you can simply bundle a Python interpreter with your code in the same way PyInstaller would (in fact, there's a tool called [pynsist](https://github.com/takluyver/pynsist) that does this). You can also create a simple script (using bash and/or powershell) that can setup the application for them. The point, basically, is to make your own installer.
 
 ### Otherwise
 
-If you are starting a project and distribution is a priority, consider <u>not using Python at all</u> (at least, not yet). Python is great for server-side software but the difficulty of distributing Python can make it undesirable for developing client-side software. There are many languages, however, like C++, C#, and Rust, that have compilation in mind and have solved most of the challenges pointed above. If you are concerned about your source code being out there, then you may also prefer this route. (rather than obfuscating).
+If you are starting a project and distribution is a priority, consider <u>not using Python at all</u> (at least, not yet). Python is great for server-side software but the difficulty of distributing Python can make it undesirable for developing client-side software. There are many languages, however, like C++, C#, and Rust, that have compilation in mind and have solved most of the challenges pointed above.
 
 ## Conclusion
 
