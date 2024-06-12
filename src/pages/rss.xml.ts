@@ -5,7 +5,7 @@ import { getCollection } from "astro:content"
 import sanitizeHtml from "sanitize-html"
 import { marked } from "marked"
 
-import { WEB_TITLE, WEB_DESCRIPTION } from "../constants"
+import { WEB_TITLE, WEB_DESCRIPTION } from "../common"
 
 function beautifyXML(xml: string, tab = '\t'): string { 
     let formatted = '';

@@ -1,0 +1,29 @@
+---
+import { type CollectionEntry } from "astro:content";
+import { format } from "date-fns"
+
+interface Props {
+    post: CollectionEntry<'posts'>
+}
+
+const { post } = Astro.props  
+---
+
+<article class="card post">
+    <a href={ `/posts/${post.slug}` }>{ post.data.title }</a>
+    <p class="text-second">
+        <time datetime={ post.data.published.toString() }>
+            { format(post.data.published, "MMMM dd, yyyy") }
+        </time>
+    </p>
+    <p>{ post.data.description }</p>
+</article>
+
+<style>
+    .post {
+		padding: 0.75em;
+		gap: 0.25em;
+	}
+	.post a { font-size: 1.25rem; }
+	.post p { margin: 0; }
+</style>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-    <xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes" />
+<xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xpfn="http://www.w3.org/2005/xpath-functions">
+    <xsl:output method="html" version="5.0" encoding="UTF-8" indent="yes" />
     <xsl:template match="/">
         <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
             <head>
@@ -13,22 +13,42 @@
             </head>
 
             <style>
-                :root {
-                    --accentColor: #3d9bd1;
+                @media (prefers-color-scheme: light) {
+                    :root {
+                        --clr-accent: hsl(212, 82%, 43%);
+                        --clr-bg: hsl(231, 15%, 86%);
+                        --clr-fg: hsl(0, 0%, 0%);
+                        --clr-fg-second: hsl(221, 14%, 25%);
+                        --clr-card: hsl(231, 30%, 82%);
+                    }
+                }
+                
+                @media (prefers-color-scheme: dark) {
+                    :root {
+                        --clr-accent: hsl(202, 62%, 53%);
+                        --clr-bg: hsl(231, 20%, 7%);
+                        --clr-fg: hsl(0, 0%, 100%);
+                        --clr-fg-second: hsl(221, 14%, 61%);
+                        --clr-card: hsl(231, 21%, 12%);
+                    }
                 }
 
                 body {
                     font-family: "Source Code Pro", monospace;
                     font-size: 1.2rem;
                     margin: 2em;
-                    background: #edf2fc;
+                    background-color: var(--clr-bg);
+                    color: var(--clr-fg);
                 }
 
                 a {
-                    color: var(--accentColor);
+                    color: var(--clr-accent);
                     text-decoration: none;
                 }
-                a:hover { text-decoration: underline; }
+
+                a:hover { 
+                    text-decoration: underline; 
+                }
 
                 .header {
                     display: flex;
@@ -36,17 +56,20 @@
                     align-items: center;
                     gap: 2em;
                 }
+
                 .header .brand {
-                    color: var(--accentColor); 
+                    color: var(--clr-accent); 
                     font-weight: bold;
                     flex-shrink: 0;
                 }
 
                 .rss-notice {
-                    background-color: #E0E0E0;
+                    background-color: var(--clr-card);
                     padding: 1em;
                 }
-                .rss-notice p { margin-block: 0.75em; }
+                .rss-notice p { 
+                    margin-block: 0.75em; 
+                }
 
                 .articles {
                     display: flex;
@@ -54,28 +77,22 @@
                     flex-direction: column;
                     margin-block: 1em;
                 }
+
                 .articles .post {
-                    background-color: #d0d9dd;
-                    padding: 0.5em 1em;
+                    display: flex;
+                    background-color: var(--clr-card);
+                    gap: 2em;
+                    padding: 0.25em 1em;
+                    align-items: center;
                 }
-                .articles .post h3 { margin-block: 0.5em; }
-                .articles .post .post-detail { color: hsl(222, 14%, 40%); }
+            
+                .articles .post h3 { 
+                    margin-block: 0.5em; 
+                }
+                .articles .post .post-detail { 
+                    color: var(--clr-fg-second); 
+                }
                 
-                @media (prefers-color-scheme: dark) {
-                    body {
-                        background: #0B151D;
-                        color: white;
-                    }
-                    .rss-notice {
-                        background-color: #212121;
-                    }
-                    .articles .post {
-                        background-color: #1a1a1a;
-                    }
-                    .articles .post .post-detail {
-                        color: #8e97aa;
-                    }
-                }
                 @media screen and (max-width: 500px) {
                     .header { display: block; }
                 }
@@ -96,42 +113,42 @@
 
                 <header class="rss-notice">
                     <p>
-                        This is an <a href="https://aboutfeeds.com/">RSS feed</a>. It is meant for feed readers and aggregators.
-                        Copy the URL from the address bar into your favorite feed reader and enjoy the freedom of web syndication!
-                    </p>
-
-                    <p>
-                        This is an HTML version of the feed. Of course, RSS feeds are XML which you can view 
-                        by inspecting the source. If you want to read the articles through the web, you probably 
-                        want <a href="https://lotta.pages.dev">my website</a>.
+                        This is an <a href="https://aboutfeeds.com/">RSS feed</a> meant for feed readers and 
+                        aggregators. Copy the URL from the address bar into your favorite reader and enjoy 
+                        the freedom of web syndication!
                     </p>
                 </header>    
 
                 <main>
                     <section class="articles">
-                        <h2>Latest posts</h2>
+                        <h2>posts</h2>
 
                         <xsl:for-each select="/rss/channel/item">
                             <article class="post">
-                                <h3>
-                                    <a target="_blank" rel="noopener noreferrer">
-                                        <xsl:attribute name="href">
-                                            <xsl:value-of select="link" />
-                                        </xsl:attribute>
-
-                                        <xsl:value-of select="title" />
-                                    </a>
-                                </h3>
-
-                                <span class="post-detail">
-                                    <time>
+                                <time>
+                                    <xsl:attribute name="datetime">
                                         <xsl:value-of select="pubDate" />
-                                    </time>
-                                </span>
+                                    </xsl:attribute>
+                                    
+                                    <!-- I don't like this hack but most browsers barely support XSLT 1.0, let alone 2.0 -->
+                                    <xsl:value-of select="substring(pubDate, 5, 12)" />
+                                </time>
 
-                                <p>
-                                    <xsl:value-of select="description" />
-                                </p>
+                                <div>
+                                    <h3>
+                                        <a target="_blank" rel="noopener noreferrer">
+                                            <xsl:attribute name="href">
+                                                <xsl:value-of select="link" />
+                                            </xsl:attribute>
+    
+                                            <xsl:value-of select="title" />
+                                        </a>
+                                    </h3>
+    
+                                    <p>
+                                        <xsl:value-of select="description" />
+                                    </p>
+                                </div>
                             </article>
                         </xsl:for-each>
                     </section>

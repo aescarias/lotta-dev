@@ -1,39 +1,124 @@
 ---
 import { format } from "date-fns"
+import type { MarkdownHeading } from "astro"
+import type { CollectionEntry } from "astro:content"
+import TOCEntry from "../components/TOCEntry.astro"
 import BaseSite from "./BaseSite.astro"
 
-const { frontmatter, readingTime } = Astro.props
+interface Props {
+    frontmatter: CollectionEntry<'posts'>['data']
+    readingTime: number
+    headings: MarkdownHeading[]
+}
+
+export interface TOCHeading extends MarkdownHeading {
+    children: TOCHeading[]
+}
+
+function getToc(headings: MarkdownHeading[]): TOCHeading[] {
+    const contents = []
+    const parent = new Map();
+    for (const heading of headings) {
+        const child = { ...heading, children: [] }
+        parent.set(heading.depth, child);
+        if (heading.depth === 2) {
+            contents.push(child)
+        } else {
+            parent.get(heading.depth - 1).children.push(child);
+        }
+    }
+    return contents
+}
+
+const { frontmatter, readingTime, headings } = Astro.props
 ---
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            const heading = entry.target.querySelector("h1, h2, h3, h4, h5, h6");
+            if (!heading) return;
+        
+            const anchor = document.querySelector<HTMLAnchorElement>(
+                `a[href="#${heading.id}"]`);
+            if (!anchor) return;
+            
+            if (entry.isIntersecting) {
+                anchor.classList.add("active")
+            } else {
+                anchor.classList.remove("active")
+            }
+        })
+    }, { 
+        rootMargin: "-1% 0% -99% 0%"
+    })
+
+    document.querySelectorAll(".blog-content section")?.forEach(entry => {
+        observer.observe(entry);
+    })
+})
+</script>
 
 <BaseSite title={ frontmatter.title } description={ frontmatter.description }>
     <h1 class="blog-title">{ frontmatter.title }</h1>
-    <p class="mono" style="color: #8e97aa;">
-        published <time>{ format(frontmatter.published, "EEEE, MMMM dd, yyyy") }</time> ·
-        { readingTime } minute read
+    <p class="mono text-second">
+        <i class="ph ph-bold ph-calendar" aria-label="published"></i>
+        <time datetime={ frontmatter.published.toString() }>
+            { format(frontmatter.published, "EEEE, MMMM dd, yyyy") }
+        </time> ·
+        <i class="ph ph-bold ph-clock" aria-label="reading time"></i>
+        { readingTime.toFixed(2) } minute read
     </p>
-    
-    <p class="mono" style="color: #8e97aa">
+
+    <p class="mono text-second">
         // { frontmatter.description }
     </p>
 
-    <main class="blog-content">
-        <slot />
-    </main>
+    <section class="blog-wrapper">
+        <main class="blog-content">
+            <slot />
+        </main>
+
+        <aside class="blog-toc">
+            <ul>
+                { getToc(headings).map(h => <TOCEntry heading={ h } />) }
+            </ul>
+        </aside>
+    </section>
 </BaseSite>
 
 <style>
     .blog-title {
         font-size: 2rem;
     }
+    .blog-wrapper {
+        display: grid;
+        gap: 2em;
+        grid-template-columns: 4fr 1fr;
+    }
+    .blog-toc {
+        position: sticky;
+        top: 0;
+        align-self: start;
+    }
+    @media screen and (max-width: 800px) {
+        .blog-toc {
+            display: none;
+        }
+        .blog-wrapper {
+            display: block;
+        }
+    }
 </style>
 
 <style is:global>
     .blkquote, .blog-content blockquote {
-        border-left: 5px solid var(--accentColor);
-        background: #282932;
+        border-left: 5px solid var(--clr-accent);
+        background: var(--clr-card);
         padding-inline: 1.25em;
-        padding-block: 0.3em;
-        margin-inline: 1.5em;
+        padding-block: 0.2em;
+        margin-inline: 0.4em;
     }
     .blog-content p {
         text-align: justify;
@@ -43,7 +128,30 @@ const { frontmatter, readingTime } = Astro.props
         border-radius: 5px;
     }
     .blog-content :not(pre) code {
-        background: #424242;
+        background: var(--clr-bg-second);
         padding: 0.15em;
+    }
+    .blog-content img {
+        display: block;
+        max-width: 100%;
+    }
+    .blog-toc ul {
+        list-style: none;
+        padding-inline: 1em;
+    }
+    .blog-toc ul:first-child {
+        padding-inline: 0;
+    }
+    .blog-toc li {
+        margin-block: 0.5em;
+    }
+    .blog-toc {
+        font-size: 1.15rem;
+    }
+    .blog-toc a {
+        color: var(--clr-fg-second);
+    }
+    .blog-toc a.active, .blog-toc a:hover {
+        color: var(--clr-link-active);
     }
 </style>

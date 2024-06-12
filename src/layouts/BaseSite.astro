@@ -1,7 +1,8 @@
 --- 
 import "@fontsource-variable/nunito-sans"
 import "@fontsource-variable/source-code-pro"
-import { WEB_TITLE } from "../constants"
+import { WEB_TITLE } from "../common"
+import NavLink from "../components/NavLink.astro";
 
 interface Props {
 	title: string;
@@ -13,7 +14,7 @@ const { title, description } = Astro.props;
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-theme="dark">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={ description }>
@@ -31,11 +32,62 @@ const { title, description } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
+		<noscript>
+			<style>
+				button[data-theme-toggle], button[data-system-toggle] {
+					display: none;
+				}
+			</style>
+		</noscript>	
+		
+		<script is:inline>
+			function getThemeSetting() {
+				return localStorage.getItem("theme") || "system"
+			}
+			
+			function setThemeSetting(theme) {
+				localStorage.setItem("theme", theme)
+			}
+			
+			function getAppliedTheme() {
+				return document.querySelector("html")?.getAttribute("data-theme")
+			}
+			
+			function applyTheme(theme) {
+				document.querySelector("html")?.setAttribute("data-theme", theme)
+			}
+
+			const prefersLight = window.matchMedia("(prefers-color-scheme: light)")
+			const savedTheme = getThemeSetting()
+			
+			prefersLight.onchange = event => {
+				if (getThemeSetting() !== "system") return
+				applyTheme(event.matches ? "light" : "dark")
+			}
+
+			if (savedTheme === "system") {
+				applyTheme(prefersLight.matches ? "light" : "dark")
+			} else {
+				applyTheme(savedTheme)
+			}
+		</script>
+
 		<nav class="navbar">
 			<h1 class="brand"><a href="/">lotta dev</a></h1>
 
 			<ul>
-				<li><a href="/about">about</a></li>
+				<li><NavLink href="/posts">posts</a></li>
+				<li><NavLink href="/about">about</a></li>
+				
+				<li>
+					<button data-theme-toggle aria-label="Toggle theme">
+						<i data-light class="ph ph-sun"></i>
+						<i data-dark class="ph ph-moon"></i>
+					</button>
+					<button data-system-toggle aria-label="Follow system theme">
+						<i class="ph ph-arrow-counter-clockwise"></i>
+					</button>
+				</li>
 			</ul>
 		</nav>
 		
@@ -65,66 +117,152 @@ const { title, description } = Astro.props;
 	</body>
 </html>
 
-<style is:global>
-	:root {
-		--accentColor: #3d9bd1;
-		--bgDark: #1a1b26;
-		--fgDark: white;
+<script is:inline defer>
+	function updateButton() {
+		if (getAppliedTheme() === "dark") {
+			document.querySelector("[data-theme-toggle] [data-dark]").style.display = "inline";
+			document.querySelector("[data-theme-toggle] [data-light]").style.display = "none";
+		} else {
+			document.querySelector("[data-theme-toggle] [data-dark]").style.display = "none";
+			document.querySelector("[data-theme-toggle] [data-light]").style.display = "inline";
+		}
 	}
+
+	document.querySelector("[data-theme-toggle]")?.addEventListener("click", event => {
+		if (getAppliedTheme() === "light") 
+			setThemeSetting("dark")
+		else 
+			setThemeSetting("light")
+		
+		applyTheme(getThemeSetting())
+		updateButton()
+	})
+
+	document.querySelector("[data-system-toggle]")?.addEventListener("click", () => {
+		setThemeSetting("system")
+		applyTheme(prefersLight.matches ? "light" : "dark")
+		updateButton()
+	})
+
+	updateButton()
+</script>
+
+<style is:global>
+	/* Defaults / base styles */
+	:root {
+        scroll-padding-top: 1rem;
+	}
+	[data-theme="light"] {
+		--clr-accent: hsl(212, 82%, 43%);
+		--clr-bg: hsl(231, 15%, 86%);
+		--clr-bg-second: hsl(0, 0%, 70%);
+		--clr-fg: hsl(0, 0%, 0%);
+		--clr-fg-second: hsl(221, 14%, 25%);
+		--clr-card: hsl(231, 30%, 82%);
+		--clr-link: hsl(220, 64%, 40%);
+		--clr-link-active: hsl(260, 100%, 30%);
+	}
+	[data-theme="dark"] {
+		--clr-accent: hsl(202, 62%, 53%);
+		--clr-bg: hsl(231, 20%, 7%);
+		--clr-bg-second: hsl(0, 0%, 20%);
+		--clr-fg: hsl(0, 0%, 100%);
+		--clr-fg-second: hsl(221, 14%, 61%);
+		--clr-card: hsl(231, 21%, 12%);
+		--clr-link: hsl(199, 94%, 85%);
+		--clr-link-active: hsl(199, 94%, 55%);
+	}
+
 	body {
 		padding: 0;
 		font-family: "Nunito Sans Variable", sans-serif;
 		font-size: 1.2rem;
-		background-color: var(--bgDark);
-		color: var(--fgDark);
+		background-color: var(--clr-bg);
+		color: var(--clr-fg);
 
 		text-rendering: optimizeLegibility;
-		font-synthesis: none;
 
         max-width: clamp(65vw, 70vw, 75vw);
 		margin: auto;
-	}
-	
-	.brand a {
-		color: var(--accentColor);
-		text-decoration: none;
 	}
 
 	h1, pre, code, .mono {
 		font-family: "Source Code Pro Variable", monospace;
 	}
 
+	button {
+		padding: 0.25em;
+		border: none;
+		border-radius: 5px;
+		background-color: var(--clr-bg-second);
+		color: var(--clr-fg);	
+		transition: background-color 0.5s;
+		cursor: pointer;
+	}
+
+	button:hover {
+		background-color: var(--clr-card);
+	}
+	
+	button[data-theme-toggle], button[data-system-toggle] {
+		font-size: 1.25rem;
+		text-align: center;
+	}
+
+	.text-second { 
+		color: var(--clr-fg-second); 
+	}
+
+	a {
+		color: var(--clr-link);
+		text-decoration: none;
+		transition: color 0.5s;
+	}
+
+	.navbar .brand a {
+		color: var(--clr-accent);
+	}
+
+	a:hover, a.active,
+	.navbar .brand a:hover {
+		color: var(--clr-link-active);
+	}
+
+	/* Navbar */
 	.navbar {
 		display: flex;
 		gap: 1em;
 		justify-content: space-between;
 		align-items: center;
 	}
-
+	
 	.navbar ul {
 		display: flex;
 		gap: 1.2em;
+		align-items: center;
 		list-style: none;
 		margin: 0;
 		padding: 0;
 	}
+
+	/* Components */
+	.card {
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+		padding: 1em;
+		border-radius: 15px;
+		background-color: var(--clr-card);		
+	}
 	
-	a {
-		color: #326ded;
-		text-decoration: none;
-	}
-
-	a:hover {
-		opacity: 85%;
-	}
-
+	/* Footer */
 	.footer {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 	}
 
-	.footer .links {
+ 	.links {
 		display: flex;
 		gap: 0.75em;
 	}
@@ -136,6 +274,9 @@ const { title, description } = Astro.props;
 			align-items: center;
 			gap: 0;
 		}
-		.footer { flex-direction: column; }
+		.card {
+			display: block;
+		}
+		.footer { flex-direction: column; margin-bottom: 1em; }
 	}
 </style>

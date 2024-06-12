@@ -1,6 +1,7 @@
 ---
 import PostLayout from "../../layouts/PostLayout.astro"
 import { getCollection } from "astro:content"
+import { getReadingTime } from "../../common"
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("posts");
@@ -10,16 +11,12 @@ export async function getStaticPaths() {
   }));
 }
 
-function getReadingTime(content: string) {
-    return content.split(" ").length / 200; // words / wpm
-}
-
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 
 export const prerender = true;
 ---
 
-<PostLayout frontmatter={ entry.data } readingTime={ getReadingTime(entry.body) }>
+<PostLayout frontmatter={ entry.data } readingTime={ getReadingTime(entry.body) } headings={ headings }>
   <Content />
 </PostLayout>

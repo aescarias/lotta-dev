@@ -1,46 +1,150 @@
 ---
 import BaseSite from "../layouts/BaseSite.astro"
-import { getCollection, type CollectionEntry } from "astro:content"
-import { formatDistance } from "date-fns"
-import { WEB_TITLE, WEB_DESCRIPTION } from "../constants"
+import BlogEntry from "../components/BlogEntry.astro"
+
+import { getCollection } from "astro:content"
+import { WEB_TITLE, WEB_DESCRIPTION, sortByLatest } from "../common"
 
 const posts = await getCollection("posts")
+const projects = [
+	{
+		title: "pdfnaut",
+		description: "A PDF processor written in Python",
+		repository: "https://github.com/aescarias/pdfnaut",
+		docs: "https://pdfnaut.rtfd.io"
+	},
+	{
+		title: "pypiwrap",
+		description: "A Python API wrapper for the Python Package Index (PyPI)",
+		repository: "https://github.com/aescarias/pypiwrap",
+		docs: "https://aescarias.github.io/pypiwrap"
+	}
+]
 
-function sortByLatest(posts: CollectionEntry<'posts'>[]) {
-	return posts.toSorted((first, second) => 
-		second.data.published.getTime() - first.data.published.getTime())
-}
 ---
 
 <BaseSite title={ WEB_TITLE } description={ WEB_DESCRIPTION }>
-	<h2 class="mono">
-		latest posts
-	</h2>
+	<section id="about" class="card about">
+		<div>	
+			<h2>I'm a fellow citizen of the web 🏓</h2>
 
-	<section class="articles">
-		{ sortByLatest(posts).map((post) => 
-			<article class="blog-article">
-				<a href={ `/posts/${post.slug}` }>{ post.data.title }</a>
-				<p style="color: #8e97aa">// published <time>
-					{ formatDistance(post.data.published, new Date(), { addSuffix: true }) }
-				</time></p>
-				<p>{ post.data.description }</p>
-			</article>
+			<p>
+				Welcome to my site. I'm Angel Carias, a software developer that loves tinkering 
+				with APIs and specifications to create applications for the modern world.
+			</p>
+			
+			<div class="links">
+				<a class="link-button" href="https://github.com/aescarias" target="_blank" 
+				   rel="noopener noreferrer">
+				   <i class="ph ph-github-logo"></i> aescarias
+				</a>
+			</div>
+		</div>
+
+		<img class="avatar" src="https://avatars.githubusercontent.com/u/69056344?v=4" 
+			 alt="Angel's avatar on Github">
+	</section>
+
+	<section id="projects">
+		<h2 class="mono">projects</h2>
+
+		<div class="project-grid">
+			{ projects.map(proj =>
+				<article class="card project">
+					<h3>{ proj.title }</h3>
+					
+					<div class="links">
+						{ proj.repository ? <a class="link-button" href={ proj.repository } target="_blank" rel="noopener noreferrer">
+							<i class="ph ph-github-logo"></i> github
+						</a> : undefined }
+
+						{ proj.docs ? <a class="link-button" href={ proj.docs } target="_blank" rel="noopener noreferrer">
+							<i class="ph ph-book-open-text"></i> docs
+						</a> : undefined }
+
+					</div>
+					
+					<p>{ proj.description }</p>
+				</article>
+			) }
+		</div>
+	</section>
+
+	<section id="posts" class="articles">
+		<h2 class="mono">posts</h2>
+
+		{ sortByLatest(posts).slice(0, 4).map((post) => 
+			<BlogEntry post={ post } />
 		) }
+
+
+		<a style="text-align: right" href="/posts">
+			<i class="ph ph-arrow-right"></i> all posts
+		</a>
 	</section>
 </BaseSite>
 
+<style is:global>
+	.link-button {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5em;
+		background-color: var(--clr-bg-second);
+		color: var(--clr-fg);
+		padding: 0.25em 0.5em;
+		border-radius: 5px;
+		transition: background-color 0.5s, color 0.5s;
+	}
+	
+	.link-button:hover {
+		background-color: var(--clr-bg); 
+	}
+</style>
+
 <style>
+	.about { flex-direction: row; }
+	.about .avatar {
+		border-radius: 50%;
+		object-fit: cover;
+	    object-position: center;
+		height: 10rem;
+	}
+
+	.project-grid {
+		padding: 0;
+		background: transparent;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1em;
+	}
+	.project-grid h3 { 
+		margin-top: 0; 
+	}
+	.project { 
+		display: block;
+		background-color: var(--clr-card); 
+	}
 	.articles {
 		display: flex;
 		flex-direction: column;
 		gap: 1em;
 	}
+	.articles > h2 { margin-bottom: 0; }
 
-	.blog-article {
-		padding: 0.5em;
-		background: #282a30;
+	
+	@media screen and (max-width: 1090px) {
+		.project-grid {
+			display: flex;
+			flex-direction: column;
+			gap: 1em;
+		}
 	}
-	.blog-article a { font-size: 1.25rem; }
-	.blog-article p { margin: 0.5em; }
+	@media screen and (max-width: 800px) {
+		.about {
+			display: flex;
+			flex-direction: column;
+			gap: 1em;
+			align-items: center;
+		}
+	}
 </style>
