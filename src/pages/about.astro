@@ -1,5 +1,6 @@
 ---
 import BaseSite from "../layouts/BaseSite.astro"
+import ExtLink from "../components/ExtLink.astro"
 import { WEB_TITLE } from "../common"
 ---
 
@@ -15,8 +16,7 @@ import { WEB_TITLE } from "../common"
 
         <p>
             This website is incredibly simple. It is written in 
-            <a href="https://astro.build/" target="_blank" 
-               rel="noopener noreferrer">Astro</a> 
+            <ExtLink href="https://astro.build/">Astro</ExtLink>
             and a bunch of Markdown.
         </p>
     </section>
@@ -40,11 +40,12 @@ import { WEB_TITLE } from "../common"
                 I didn't really do much until I started learning Python sometime in 2019.
             </li>
             <li>
-                🏕️ My main languages nowadays are Python and TypeScript. I also sometimes use
-                Rust.
+                🏕️ My main languages nowadays are Python and TypeScript. I also sometimes 
+                use Rust.
             </li>
             <li>
-                🏘️ My web framework of choice is Svelte but I have also used Vue.
+                🏘️ My web frameworks of choice are Svelte and Astro but I have previously
+                used Vue.
             </li>
         </ul>
     </section>
@@ -53,28 +54,24 @@ import { WEB_TITLE } from "../common"
         <h1>License & Attribution</h1>
 
         <p>
-            Unless otherwise explicitly stated, all written content and attached assets
+            Unless otherwise explicitly stated, all written content and any of its assets
             (as in images, videos, and illustrations) on this site are provided under
-            the <a href="https://creativecommons.org/licenses/by/4.0/deed.en" target="_blank" rel="noopener noreferrer">
-                Creative Commons 4.0 Attribution License.
-            </a>
+            the <ExtLink href="https://creativecommons.org/licenses/by/4.0/deed.en">Creative Commons 4.0 Attribution License</ExtLink>.
+            See the site's <ExtLink href="https://github.com/aescarias/lotta-dev?tab=readme-ov-file">README</ExtLink>
+            file for details.
         </p>
 
         <p>
-            The source code powering this site is provided under the MIT License and can
-            be found on <a href="https://github.com/aescarias/lotta-dev" target="_blank" rel="noopener noreferrer">
-                Github
-            </a>. 
+            The source code for this website is available on 
+            <ExtLink href="https://github.com/aescarias/lotta-dev">Github</ExtLink> 
+            and is provided under the MIT License.
         </p>
 
         <p>
-            The icons used for the Github and RSS logo are part of the 
-            <a href="https://phosphoricons.com/" target="_blank" rel="noopener noreferrer">
-                Phosphor Icons
-            </a> set which is provided under the MIT License. 
-            
-            The fonts used are <b>Source Code Pro</b> and <b>Nunito</b> which are both
-            under the Open Font License.
+            The icons used on this website are part of 
+            <ExtLink href="https://phosphoricons.com/">Phosphor Icons</ExtLink>,
+            provided under the MIT License. The fonts used are <b>Source Code Pro</b> 
+            and <b>Nunito</b> which are both under the Open Font License.
         </p>
     </section>
 </BaseSite>
