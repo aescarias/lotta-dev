@@ -80,11 +80,11 @@ const { title, description } = Astro.props;
 				<li><NavLink href="/about">about</a></li>
 				
 				<li>
-					<button data-theme-toggle aria-label="Toggle theme">
+					<button data-theme-toggle title="Toggle theme">
 						<i data-light class="ph ph-sun"></i>
 						<i data-dark class="ph ph-moon"></i>
 					</button>
-					<button data-system-toggle aria-label="Follow system theme">
+					<button data-system-toggle title="Follow system theme">
 						<i class="ph ph-arrow-counter-clockwise"></i>
 					</button>
 				</li>
@@ -148,10 +148,17 @@ const { title, description } = Astro.props;
 </script>
 
 <style is:global>
-	/* Defaults / base styles */
+	/* Defaults / base styles 
+	   Partly based on Josh's CSS Reset: https://www.joshwcomeau.com/css/custom-css-reset/ */
+
+	*, *::before, *::after { 
+		box-sizing: border-box; 
+	}
+	
 	:root {
         scroll-padding-top: 1rem;
 	}
+
 	[data-theme="light"] {
 		--clr-accent: hsl(212, 82%, 43%);
 		--clr-bg: hsl(231, 15%, 86%);
@@ -162,6 +169,7 @@ const { title, description } = Astro.props;
 		--clr-link: hsl(220, 64%, 40%);
 		--clr-link-active: hsl(260, 100%, 30%);
 	}
+
 	[data-theme="dark"] {
 		--clr-accent: hsl(202, 62%, 53%);
 		--clr-bg: hsl(231, 20%, 7%);
@@ -177,17 +185,28 @@ const { title, description } = Astro.props;
 		padding: 0;
 		font-family: "Nunito Sans Variable", sans-serif;
 		font-size: 1.2rem;
+		line-height: 1.5;
 		background-color: var(--clr-bg);
 		color: var(--clr-fg);
 
+		-webkit-font-smoothing: antialiased;
 		text-rendering: optimizeLegibility;
 
         max-width: clamp(65vw, 70vw, 75vw);
 		margin: auto;
 	}
 
+	img, picture, video, canvas, svg {
+  		display: block;
+  		max-width: 100%;
+	}
+ 
 	h1, pre, code, .mono {
 		font-family: "Source Code Pro Variable", monospace;
+	}
+
+	p, h1, h2, h3, h4, h5, h6 {
+ 		overflow-wrap: break-word;
 	}
 
 	button {

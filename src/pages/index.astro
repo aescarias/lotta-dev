@@ -30,11 +30,11 @@ const projects = [
 
 <BaseSite title={ WEB_TITLE } description={ WEB_DESCRIPTION }>
 	<section id="about" class="card about">
-		<div>	
+		<div class="about-details">	
 			<h2>I'm a fellow citizen of the web 🏓</h2>
 
 			<p>
-				Welcome to my site. I'm Angel Carias, a software developer that loves tinkering 
+				I'm Angel Carias, a software developer that loves tinkering 
 				with APIs and specifications to create great applications.
 			</p>
 			
@@ -58,6 +58,8 @@ const projects = [
 				<article class="card project">
 					<h3>{ proj.title }</h3>
 					
+					<p>{ proj.description }</p>
+
 					<div class="links">
 						{ proj.repository ? <a class="link-button" href={ proj.repository } target="_blank" rel="noopener noreferrer">
 							<i class="ph ph-github-logo"></i> github
@@ -66,10 +68,7 @@ const projects = [
 						{ proj.docs ? <a class="link-button" href={ proj.docs } target="_blank" rel="noopener noreferrer">
 							<i class="ph ph-book-open-text"></i> docs
 						</a> : undefined }
-
 					</div>
-					
-					<p>{ proj.description }</p>
 				</article>
 			) }
 		</div>
@@ -108,6 +107,7 @@ const projects = [
 
 <style>
 	.about { flex-direction: row; }
+	.about-details h2 { margin: 0; }
 	.about .avatar {
 		border-radius: 50%;
 		object-fit: cover;
@@ -122,9 +122,10 @@ const projects = [
 		grid-template-columns: repeat(3, 1fr);
 		gap: 1em;
 	}
-	.project-grid h3 { 
-		margin-top: 0; 
+	.project-grid h3, .project-grid p { 
+		margin-block: 0.5em; 
 	}
+	.project-grid h3 { margin-top: 0; }
 	.project { 
 		display: block;
 		background-color: var(--clr-card); 
@@ -135,7 +136,6 @@ const projects = [
 		gap: 1em;
 	}
 	.articles > h2 { margin-bottom: 0; }
-
 	
 	@media screen and (max-width: 1090px) {
 		.project-grid {
