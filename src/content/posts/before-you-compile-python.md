@@ -2,6 +2,7 @@
 title: Before you compile Python...
 description: The complicated reality of creating a Python executable
 published: 2023-12-27T11:23:06-06:00
+updated: 2024-07-27T21:00:12-06:00
 ---
 
 There are cases where you may want to distribute a project you've made in Python. Many people will resort to creating an executable because it's easier for them and easier for an user.
