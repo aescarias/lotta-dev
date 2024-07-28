@@ -28,7 +28,7 @@ This is because antivirus software flag executables based on patterns or behavio
 
 ### Python was not designed for this
 
-CPython (the standard implementation of Python) does not compile to machine code and a lot of its features (notably, `exec()` and `eval()`) can make this harder, so the solutions out there will be hacky. "Freezing" tools like PyInstaller or ``briefcase`` bundle the CPython runtime and the standard library with the advantage of their incredible portability and ease of use.
+CPython (the standard reference implementation of Python) does not compile to machine code and the flexibility of the language can definitely complicate matters, so the solutions out there will be hacky. "Freezing" tools like PyInstaller or ``briefcase`` bundle the CPython runtime and the standard library with the advantage of their incredible portability and ease of use.
 
 The issue with "freezing" tools is that most of them have to extract files to a temporary directory. This not only means that your application needs to have write access to the filesystem (even if your application doesn't directly depend on it), it also means that we now  depend on I/O speed, which can fluctuate. Some users might have to wait a few seconds before they see a window and it may put off some of them.
 
@@ -59,6 +59,6 @@ If you are starting a project and distribution is a priority, consider <u>not us
 
 ## Conclusion
 
-The reason I made this article is to compile the most common responses I have seen others give when people ask "How can I compile my app into an EXE?". This is a very common question and the usual answer is "You don't." Without context, this can feel dismissive.
+The reason I made this article is to compile the most common responses I have seen others give when people ask "How can I compile my app into an EXE?". This is a very common question and the usual answer of "You don't" can feel somewhat discouraging.
 
 The point of this article is not to discourage or scare you into not using these tools. I personally have used some of them and there's a lot of projects that do. The point is not to tell you not to climb a tree but to tell you what you're in for. While the mission of these tools is great and respectable, there are challenges that come from the nature of Python itself, so I hope this post clarified at least a few of them.
