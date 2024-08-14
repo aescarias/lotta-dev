@@ -12,17 +12,17 @@ Python, the language, has a few available interpreters out there. The official a
 
 From their website, you can click on [Downloads](https://www.python.org/downloads/) in the navigation bar and you will be brought to a page similar to this one.
 
-![The downloads page for Python on Windows](/static/images/python-downloads-page.png)
+![The downloads page for Python on Windows](/images/python-downloads-page.png)
 
 Clicking on the yellow button (the one with "Download Python \[some version\]") will immediately start downloading the latest version of Python appropriate for your system.
 
 If you want a different version, you can go to [Downloads > Windows](https://www.python.org/downloads/windows/) in the navigation bar and scroll down until you find the correct version.
 
-![An installer entry as seen in Python Releases for Windows](/static/images/python-stable-release.png)
+![An installer entry as seen in Python Releases for Windows](/images/python-stable-release.png)
 
 You can select a version from here or click on the Python version to learn more about the release.
 
-![A list of available files for this release](/static/images/python-files.png)
+![A list of available files for this release](/images/python-files.png)
 
 > **About these files**
 >
@@ -40,7 +40,7 @@ Once you have downloaded the Python installer, you can run it from the Downloads
 
 Once you do, you will be greeted with this window:
 
-![The Python installer](/static/images/py312-installer.png)
+![The Python installer](/images/py312-installer.png)
 
 You are given two options: "Install Now" will install Python including IDLE and pip and "Customize Installation" will give you more options to configure the installation.
 
@@ -53,13 +53,13 @@ You can also see two checkboxes at the bottom:
 
 By selecting "Customize installation", you will be brought to these options:
 
-![The "Optional features" panel within the installer](/static/images/py312-features.png)
+![The "Optional features" panel within the installer](/images/py312-features.png)
 
 This allows you to customize which Python components to install. You should leave these options checked unless you know what you're doing!
 
 Next, you'll be greeted with the "Advanced Options" panel.
 
-![The "Advanced options" panel within the installer](/static/images/py312-options.png)
+![The "Advanced options" panel within the installer](/images/py312-options.png)
 
 This notably allows you to customize where to install Python and whether to install it for all users or just you.
 
@@ -73,15 +73,15 @@ This notably allows you to customize where to install Python and whether to inst
 
 Once you click "Install Now" (or "Install" in the advanced options panel), Python will start installing all the necessary components:
 
-![Python being installed](/static/images/py312-progress.png)
+![Python being installed](/images/py312-progress.png)
 
 After this completes, you should hopefully see "Setup was successful."
 
-![Python installed successfully](/static/images/py312-done.png)
+![Python installed successfully](/images/py312-done.png)
 
 After clicking Close, you can do as instructed and search for Python in your start menu.
 
-![The Python 3.12 shell](/static/images/py312-shell.png)
+![The Python 3.12 shell](/images/py312-shell.png)
 
 ## FAQ
 
