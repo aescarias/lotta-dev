@@ -66,11 +66,15 @@ document.addEventListener("DOMContentLoaded", () => {
         <i class="ph ph-bold ph-calendar" aria-label="published"></i>
         <time datetime={ frontmatter.published.toString() }>
             { format(frontmatter.published, "EEEE, MMMM dd, yyyy") }
-        </time> ·
-        <i class="ph ph-bold ph-note-pencil" aria-label="last updated"></i>
-        { frontmatter.updated ? <time datetime={ frontmatter.updated.toString() }>
-            { format(frontmatter.updated, "MMMM dd, yyyy") }
-        </time> : undefined }·
+        </time> 
+        { frontmatter.updated ? 
+            <i class="ph ph-bold ph-note-pencil" aria-label="last updated"></i>
+            <span>·</span>
+            <time datetime={ frontmatter.updated.toString() }>
+                { format(frontmatter.updated, "MMMM dd, yyyy") }
+            </time> 
+        : undefined }
+        <span>·</span>
         <i class="ph ph-bold ph-clock" aria-label="reading time"></i>
         { readingTime.toFixed(2) } minute read
     </p>
