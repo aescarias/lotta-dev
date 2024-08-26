@@ -1,7 +1,8 @@
 ---
 title: Installing Python on Windows, the right way
 description: Installing Python on Windows without the troubles.
-published: 2024-08-26T14:40:00-06:00
+published: 2024-08-14T14:27:00-06:00
+updated: 2024-08-26T14:40:00-06:00
 ---
 
 To use Python, you need to install a Python interpreter that runs your code. This post should help you get ready with Python on Windows the right way.
