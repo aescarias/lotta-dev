@@ -1,7 +1,7 @@
 ---
 title: Installing Python on Windows, the right way
 description: Installing Python on Windows without the troubles.
-published: 2024-08-14T14:27:00-06:00
+published: 2024-08-26T14:40:00-06:00
 ---
 
 To use Python, you need to install a Python interpreter that runs your code. This post should help you get ready with Python on Windows the right way.
@@ -14,7 +14,7 @@ From their website, you can click on [Downloads](https://www.python.org/download
 
 ![The downloads page for Python on Windows](/images/python-downloads-page.png)
 
-Clicking on the yellow button (the one with "Download Python \[some version\]") will immediately start downloading the latest version of Python appropriate for your system.
+Clicking on the yellow button (the one with "Download Python \[some version\]" on it) will immediately start downloading the latest version of Python appropriate for your system.
 
 If you want a different version, you can go to [Downloads > Windows](https://www.python.org/downloads/windows/) in the navigation bar and scroll down until you find the correct version.
 
@@ -33,6 +33,8 @@ You can select a version from here or click on the Python version to learn more 
 > The "embeddable" Windows releases are standalone redistributable versions of Python designed to be included as a runtime in other applications.
 >
 > Each release also used to provide a web-based Windows installer that installed Python via the network. They were seemingly discontinued, however, due to low adoption.
+>
+> It's worth noting that releases of Python in the "security fixes only" stage only ship Python releases in source form only. No installers are made.
 
 ## Installing Python
 
@@ -79,7 +81,7 @@ After this completes, you should hopefully see "Setup was successful."
 
 ![Python installed successfully](/images/py312-done.png)
 
-After clicking Close, you can do as instructed and search for Python in your start menu.
+After clicking Close, you can do as instructed and search for Python in your start menu. You should be able to open a terminal and type `py` to run Python (if you installed the Python launcher) and type `python` and `pip` to use those components (if you added Python to PATH).
 
 ![The Python 3.12 shell](/images/py312-shell.png)
 
@@ -87,15 +89,16 @@ After clicking Close, you can do as instructed and search for Python in your sta
 
 ### My setup fails. What do I do?
 
-Due to the nature of Windows, sometimes things don't work out. If your installation fails, try one of the following:
+Because the Python installer can fail due to a plethora of reasons (permissions, missing or corrupted files, partially installed releases, etc), there's no simple answer for fixing. There are however a few things you can try to diagnose why it fails:
 
-- The installer should leave a log file with information about what caused the install to fail. Search for `0x8` within the installer and look for those errors online (they look something like this example: `0x80070641`). Above these `0x8` strings, you will also find the component that produced this error.
+- The installer should leave a log file with information about what caused the install to fail. Search for `0x8` within the log and lookup those errors through [this website](<https://james.darpinian.com/decoder/>) (they look something like this example: `0x80070641`). Above these `0x8` strings, you will also find the component that produced this error.
+- The installer also leaves more verbose logs for each component in the `Temp` folder. Search for `WixBundleLog_` in the log file. The location of the log file should be in the same line.
 - If you see "This installation is forbidden by your system policy", you might need to run the installer as administrator.
 - If you see "A newer version of Python \[x\] is already installed", this means that the installer has found traces of a newer release on your PC. Make sure that you have uninstalled these properly (in some cases, including the launcher) and try again. To make sure, run a specialized application like [BCUninstaller](https://www.bcuninstaller.com/) that adequately removes leftovers from uninstalls.
-- If you see "The network resource is unavailable", this means that the installer was unable to extract that component. Remove any leftovers as instructed above and try again.
+- If you see "The network resource is unavailable", this usually means that the installer was unable to extract that component. Remove any leftovers as instructed above and try again.
 - If you see a more generic error like "The user cancelled the installation" or "Unrecoverable error during install", this can hint at multiple factors:
   - Improperly uninstalled versions of Python: follow as instructed above.
-  - Permission issues: run as admin.
+  - Permission issues: run as admin or uncheck the "Install launcher for all users" option. It is also possible your antivirus software is interfering with the installer so disabling it temporarily may work.
   - An issue with the Windows installer service: run [this troubleshooter](http://support.microsoft.com/mats/program_install_and_uninstall) from Microsoft and try again.
 
 ### Should I use the Microsoft Store version?
