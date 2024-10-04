@@ -68,8 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
             { format(frontmatter.published, "EEEE, MMMM dd, yyyy") }
         </time> 
         { frontmatter.updated ? 
-            <i class="ph ph-bold ph-note-pencil" aria-label="last updated"></i>
             <span>·</span>
+            <i class="ph ph-bold ph-note-pencil" aria-label="last updated"></i>
             <time datetime={ frontmatter.updated.toString() }>
                 { format(frontmatter.updated, "MMMM dd, yyyy") }
             </time> 
