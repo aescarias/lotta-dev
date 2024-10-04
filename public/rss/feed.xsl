@@ -155,7 +155,7 @@
                 </main>
 
                 <footer>
-                    © 2024. Angel Carias.
+                    © 2023. Angel Carias.
                     <a href="/about#legal">license</a> ·
                     <a href="https://github.com/aescarias/lotta-dev" target="_blank" rel="noopener noreferrer">
                         github
