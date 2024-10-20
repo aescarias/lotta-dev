@@ -181,16 +181,17 @@ const { title, description } = Astro.props;
 		--clr-link-active: hsl(199, 94%, 55%);
 	}
 
-	html, body {
+	html {
 		background-color: var(--clr-bg);
 	}
-	
+
 	body {
 		padding: 0;
 		font-family: "Nunito Sans Variable", sans-serif;
 		font-size: 1.2rem;
 		line-height: 1.5;
 		color: var(--clr-fg);
+		color-scheme: dark light;
 
 		-webkit-font-smoothing: antialiased;
 		text-rendering: optimizeLegibility;

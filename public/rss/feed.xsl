@@ -33,7 +33,7 @@
                     }
                 }
                 
-                html, body {
+                html {
                     background-color: var(--clr-bg);
                 }
 
