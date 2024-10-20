@@ -32,12 +32,15 @@
                         --clr-card: hsl(231, 21%, 12%);
                     }
                 }
+                
+                html, body {
+                    background-color: var(--clr-bg);
+                }
 
                 body {
                     font-family: "Source Code Pro", monospace;
                     font-size: 1.2rem;
                     margin: 2em;
-                    background-color: var(--clr-bg);
                     color: var(--clr-fg);
                 }
 

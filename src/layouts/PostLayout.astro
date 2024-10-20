@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         })
     }, { 
-        rootMargin: "-1% 0% -99% 0%"
+        rootMargin: "-5% 0% -95% 0%"
     })
 
     document.querySelectorAll(".blog-content section")?.forEach(entry => {
@@ -68,13 +68,11 @@ document.addEventListener("DOMContentLoaded", () => {
             { format(frontmatter.published, "EEEE, MMMM dd, yyyy") }
         </time> 
         { frontmatter.updated ? 
-            <span>·</span>
             <i class="ph ph-bold ph-note-pencil" aria-label="last updated"></i>
             <time datetime={ frontmatter.updated.toString() }>
                 { format(frontmatter.updated, "MMMM dd, yyyy") }
             </time> 
         : undefined }
-        <span>·</span>
         <i class="ph ph-bold ph-clock" aria-label="reading time"></i>
         { readingTime.toFixed(2) } minute read
     </p>
