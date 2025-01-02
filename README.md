@@ -1,6 +1,6 @@
 # lotta dev
 
-Programming related posts by Angel Carias, available at <https://lotta.pages.dev>.
+The code powering my website available at <https://lotta.pages.dev>.
 
 ## License
 

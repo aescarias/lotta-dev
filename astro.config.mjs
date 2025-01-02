@@ -8,6 +8,14 @@ export default defineConfig({
   output: "server",
   adapter: cloudflare(),
   markdown: {
-    remarkPlugins: [sectionize]
+    remarkPlugins: [sectionize],
+    shikiConfig: {
+      themes: {
+        light: "vitesse-light",
+        dark: "vitesse-dark"
+      },
+      defaultColor: false,
+      cssVariablePrefix: '--shiki-'
+    }
   }
 });

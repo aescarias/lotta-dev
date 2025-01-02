@@ -1,306 +1,346 @@
---- 
-import "@fontsource-variable/nunito-sans"
-import "@fontsource-variable/source-code-pro"
-import { WEB_TITLE } from "../common"
+---
+import "@fontsource-variable/nunito-sans";
+import "@fontsource-variable/source-code-pro";
+import { WEB_TITLE } from "../common";
 import NavLink from "../components/NavLink.astro";
 
 interface Props {
-	title: string;
-	description: string;
+  title: string;
+  description: string;
 }
 
 const { title, description } = Astro.props;
 ---
 
-<!DOCTYPE html>
-
+<!doctype html>
 <html lang="en" data-theme="dark">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content={ description }>
-		<meta name="author" content={ WEB_TITLE }>
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={ Astro.generator } />
-		<meta name="google-site-verification" content="oD_AeHLqTV6g8wIpZXEKEOLTjrhOksSON8fMA2wu9uM" />
-		<link rel="alternate" type="application/rss+xml" title={ WEB_TITLE }
-			  href="/rss.xml" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="author" content={WEB_TITLE} />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta
+      name="google-site-verification"
+      content="oD_AeHLqTV6g8wIpZXEKEOLTjrhOksSON8fMA2wu9uM"
+    />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={WEB_TITLE}
+      href="/rss.xml"
+    />
 
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="stylesheet" type="text/css"
-			  href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css"
+    />
 
-		<title>{title}</title>
-	</head>
-	<body>
-		<noscript>
-			<style>
-				button[data-theme-toggle], button[data-system-toggle] {
-					display: none;
-				}
-			</style>
-		</noscript>	
-		
-		<script is:inline>
-			function getThemeSetting() {
-				return localStorage.getItem("theme") || "system"
-			}
-			
-			function setThemeSetting(theme) {
-				localStorage.setItem("theme", theme)
-			}
-			
-			function getAppliedTheme() {
-				return document.querySelector("html")?.getAttribute("data-theme")
-			}
-			
-			function applyTheme(theme) {
-				document.querySelector("html")?.setAttribute("data-theme", theme)
-			}
+    <title>{title}</title>
+  </head>
+  <body>
+    <noscript>
+      <style>
+        button[data-theme-toggle],
+        button[data-system-toggle] {
+          display: none;
+        }
+      </style>
+    </noscript>
 
-			const prefersLight = window.matchMedia("(prefers-color-scheme: light)")
-			const savedTheme = getThemeSetting()
-			
-			prefersLight.onchange = event => {
-				if (getThemeSetting() !== "system") return
-				applyTheme(event.matches ? "light" : "dark")
-			}
+    <script is:inline>
+      function getThemeSetting() {
+        return localStorage.getItem("theme") || "system";
+      }
 
-			if (savedTheme === "system") {
-				applyTheme(prefersLight.matches ? "light" : "dark")
-			} else {
-				applyTheme(savedTheme)
-			}
-		</script>
+      function setThemeSetting(theme) {
+        localStorage.setItem("theme", theme);
+      }
 
-		<nav class="navbar">
-			<h1 class="brand"><a href="/">lotta dev</a></h1>
+      function getAppliedTheme() {
+        return document.querySelector("html")?.getAttribute("data-theme");
+      }
 
-			<ul>
-				<li><NavLink href="/posts">posts</a></li>
-				<li><NavLink href="/about">about</a></li>
-				
-				<li>
-					<button data-theme-toggle title="Toggle theme">
-						<i data-light class="ph ph-sun"></i>
-						<i data-dark class="ph ph-moon"></i>
-					</button>
-					<button data-system-toggle title="Follow system theme">
-						<i class="ph ph-arrow-counter-clockwise"></i>
-					</button>
-				</li>
-			</ul>
-		</nav>
-		
-		<main style="margin-block: 1em;">
-			<slot />
-		</main>
+      function applyTheme(theme) {
+        document.querySelector("html")?.setAttribute("data-theme", theme);
+      }
 
-		<footer class="footer">
-			<p>
-				&copy; 2023. Angel Carias.
-				<a href="/about#legal">
-					view license
-				</a>
-			</p>
-			<div class="links">
-				<a href="https://github.com/aescarias/lotta-dev" target="_blank" rel="noopener noreferrer">
-					<i class="ph ph-github-logo" style="font-size: 1.25rem"/>
-					github
-				</a>
+      const prefersLight = window.matchMedia("(prefers-color-scheme: light)");
+      const savedTheme = getThemeSetting();
 
-				<a href="/rss.xml" target="_blank" rel="noopener noreferrer">
-					<i class="ph ph-rss-simple" style="font-size: 1.25rem"/>
-					rss
-				</a>
-			</div>
-		</footer>
-	</body>
+      prefersLight.onchange = (event) => {
+        if (getThemeSetting() !== "system") return;
+        applyTheme(event.matches ? "light" : "dark");
+      };
+
+      if (savedTheme === "system") {
+        applyTheme(prefersLight.matches ? "light" : "dark");
+      } else {
+        applyTheme(savedTheme);
+      }
+    </script>
+
+    <nav class="navbar">
+      <h1 class="brand"><a href="/">lotta dev</a></h1>
+
+      <ul>
+        <li><NavLink href="/posts">posts</NavLink></li>
+        <li><NavLink href="/about">about</NavLink></li>
+
+        <li>
+          <button data-theme-toggle title="Toggle theme">
+            <i data-light class="ph ph-sun"></i>
+            <i data-dark class="ph ph-moon"></i>
+          </button>
+          <button data-system-toggle title="Follow system theme">
+            <i class="ph ph-arrow-counter-clockwise"></i>
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <main style="margin-block: 1em;">
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <p>
+        &copy; 2023. Angel Carias.
+        <a href="/about#legal"> view license </a>
+      </p>
+      <div class="links">
+        <a
+          href="https://github.com/aescarias/lotta-dev"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <i class="ph ph-github-logo" style="font-size: 1.25rem"></i>
+          github
+        </a>
+
+        <a href="/rss.xml" target="_blank" rel="noopener noreferrer">
+          <i class="ph ph-rss-simple" style="font-size: 1.25rem"></i>
+          rss
+        </a>
+      </div>
+    </footer>
+  </body>
 </html>
 
 <script is:inline defer>
-	function updateButton() {
-		if (getAppliedTheme() === "dark") {
-			document.querySelector("[data-theme-toggle] [data-dark]").style.display = "inline";
-			document.querySelector("[data-theme-toggle] [data-light]").style.display = "none";
-		} else {
-			document.querySelector("[data-theme-toggle] [data-dark]").style.display = "none";
-			document.querySelector("[data-theme-toggle] [data-light]").style.display = "inline";
-		}
-	}
+  function updateToggle() {
+    if (getAppliedTheme() === "dark") {
+      document.querySelector("[data-theme-toggle] [data-dark]").style.display =
+        "inline";
+      document.querySelector("[data-theme-toggle] [data-light]").style.display =
+        "none";
+    } else {
+      document.querySelector("[data-theme-toggle] [data-dark]").style.display =
+        "none";
+      document.querySelector("[data-theme-toggle] [data-light]").style.display =
+        "inline";
+    }
+  }
 
-	document.querySelector("[data-theme-toggle]")?.addEventListener("click", event => {
-		if (getAppliedTheme() === "light") 
-			setThemeSetting("dark")
-		else 
-			setThemeSetting("light")
-		
-		applyTheme(getThemeSetting())
-		updateButton()
-	})
+  document
+    .querySelector("[data-theme-toggle]")
+    ?.addEventListener("click", (event) => {
+      if (getAppliedTheme() === "light") setThemeSetting("dark");
+      else setThemeSetting("light");
 
-	document.querySelector("[data-system-toggle]")?.addEventListener("click", () => {
-		setThemeSetting("system")
-		applyTheme(prefersLight.matches ? "light" : "dark")
-		updateButton()
-	})
+      applyTheme(getThemeSetting());
+      updateToggle();
+    });
 
-	updateButton()
+  document
+    .querySelector("[data-system-toggle]")
+    ?.addEventListener("click", () => {
+      setThemeSetting("system");
+      applyTheme(prefersLight.matches ? "light" : "dark");
+      updateToggle();
+    });
+
+  updateToggle();
 </script>
 
 <style is:global>
-	/* Defaults / base styles 
-	   Partly based on Josh's CSS Reset: https://www.joshwcomeau.com/css/custom-css-reset/ */
+  /* 
+  Defaults / base styles 
+	Partly based on Josh's CSS Reset: https://www.joshwcomeau.com/css/custom-css-reset/ 
+  */
 
-	*, *::before, *::after { 
-		box-sizing: border-box; 
-	}
-	
-	:root {
-        scroll-padding-top: 1rem;
-	}
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-	[data-theme="light"] {
-		--clr-accent: hsl(212, 82%, 43%);
-		--clr-bg: hsl(231, 15%, 86%);
-		--clr-bg-second: hsl(0, 0%, 70%);
-		--clr-fg: hsl(0, 0%, 0%);
-		--clr-fg-second: hsl(221, 14%, 25%);
-		--clr-card: hsl(231, 30%, 82%);
-		--clr-link: hsl(220, 64%, 40%);
-		--clr-link-active: hsl(260, 100%, 30%);
-	}
+  :root {
+    scroll-padding-top: 1rem;
+  }
 
-	[data-theme="dark"] {
-		--clr-accent: hsl(202, 62%, 53%);
-		--clr-bg: hsl(231, 20%, 7%);
-		--clr-bg-second: hsl(0, 0%, 20%);
-		--clr-fg: hsl(0, 0%, 100%);
-		--clr-fg-second: hsl(221, 14%, 61%);
-		--clr-card: hsl(231, 21%, 12%);
-		--clr-link: hsl(199, 94%, 85%);
-		--clr-link-active: hsl(199, 94%, 55%);
-	}
+  [data-theme="light"] {
+    --clr-accent: hsl(212, 82%, 43%);
+    --clr-bg: hsl(231, 15%, 86%);
+    --clr-bg-second: hsl(0, 0%, 90%);
+    --clr-fg: hsl(0, 0%, 0%);
+    --clr-fg-second: hsl(221, 14%, 25%);
+    --clr-card: hsl(231, 30%, 82%);
+    --clr-link: hsl(220, 64%, 30%);
+    --clr-link-active: hsl(260, 100%, 40%);
+  }
 
-	html {
-		background-color: var(--clr-bg);
-	}
+  [data-theme="dark"] {
+    --clr-accent: hsl(202, 62%, 53%);
+    --clr-bg: hsl(231, 20%, 7%);
+    --clr-bg-second: hsl(0, 0%, 15%);
+    --clr-fg: hsl(0, 0%, 100%);
+    --clr-fg-second: hsl(221, 14%, 61%);
+    --clr-card: hsl(231, 21%, 12%);
+    --clr-link: hsl(199, 94%, 85%);
+    --clr-link-active: hsl(199, 94%, 55%);
+  }
 
-	body {
-		padding: 0;
-		font-family: "Nunito Sans Variable", sans-serif;
-		font-size: 1.2rem;
-		line-height: 1.5;
-		color: var(--clr-fg);
-		color-scheme: dark light;
+  html {
+    background-color: var(--clr-bg);
+  }
 
-		-webkit-font-smoothing: antialiased;
-		text-rendering: optimizeLegibility;
+  body {
+    padding: 0;
+    font-family: "Nunito Sans Variable", sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: var(--clr-fg);
+    color-scheme: dark light;
 
-        max-width: clamp(65vw, 70vw, 75vw);
-		margin: auto;
-	}
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 
-	img, picture, video, canvas, svg {
-  		display: block;
-  		max-width: 100%;
-	}
- 
-	h1, pre, code, .mono {
-		font-family: "Source Code Pro Variable", monospace;
-	}
+    max-width: clamp(65vw, 70vw, 75vw);
+    margin: auto;
+  }
 
-	p, h1, h2, h3, h4, h5, h6 {
- 		overflow-wrap: break-word;
-	}
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
 
-	button {
-		padding: 0.25em;
-		border: none;
-		border-radius: 5px;
-		background-color: var(--clr-bg-second);
-		color: var(--clr-fg);	
-		transition: background-color 0.5s;
-		cursor: pointer;
-	}
+  h1,
+  pre,
+  code,
+  .mono {
+    font-family: "Source Code Pro Variable", monospace;
+  }
 
-	button:hover {
-		background-color: var(--clr-card);
-	}
-	
-	button[data-theme-toggle], button[data-system-toggle] {
-		font-size: 1.25rem;
-		text-align: center;
-	}
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    overflow-wrap: break-word;
+  }
 
-	.text-second { 
-		color: var(--clr-fg-second); 
-	}
+  button {
+    padding: 0.25em;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--clr-bg-second);
+    color: var(--clr-fg);
+    transition: background-color 0.5s;
+    cursor: pointer;
+  }
 
-	a {
-		color: var(--clr-link);
-		text-decoration: none;
-		transition: color 0.5s;
-		display: inline-block;
-	}
+  button:hover {
+    background-color: var(--clr-card);
+  }
 
-	.navbar .brand a {
-		color: var(--clr-accent);
-	}
+  button[data-theme-toggle],
+  button[data-system-toggle] {
+    font-size: 1.25rem;
+    text-align: center;
+  }
 
-	a:hover, a.active,
-	.navbar .brand a:hover {
-		color: var(--clr-link-active);
-	}
+  .text-second {
+    color: var(--clr-fg-second);
+  }
 
-	/* Navbar */
-	.navbar {
-		display: flex;
-		gap: 1em;
-		justify-content: space-between;
-		align-items: center;
-	}
-	
-	.navbar ul {
-		display: flex;
-		gap: 1.2em;
-		align-items: center;
-		list-style: none;
-		margin: 0;
-		padding: 0;
-	}
+  a {
+    color: var(--clr-link);
+    text-decoration: none;
+    transition: color 0.5s;
+    display: inline-block;
+  }
 
-	/* Components */
-	.card {
-		display: flex;
-		flex-direction: column;
-		gap: 1em;
-		padding: 1em;
-		border-radius: 15px;
-		background-color: var(--clr-card);		
-	}
-	
-	/* Footer */
-	.footer {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
+  .navbar .brand a {
+    color: var(--clr-accent);
+  }
 
- 	.links {
-		display: flex;
-		gap: 0.75em;
-	}
+  a:hover,
+  a.active,
+  .navbar .brand a:hover {
+    color: var(--clr-link-active);
+  }
 
-	@media screen and (max-width: 500px) {
-		.navbar { 
-			flex-direction: column; 
-			justify-content: center;
-			align-items: center;
-			gap: 0;
-		}
-		.card {
-			display: block;
-		}
-		.footer { flex-direction: column; margin-bottom: 1em; }
-	}
+  /* Navbar */
+  .navbar {
+    display: flex;
+    gap: 1em;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar ul {
+    display: flex;
+    gap: 1.2em;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Components */
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em;
+    border-radius: 15px;
+    background-color: var(--clr-card);
+  }
+
+  /* Footer */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .links {
+    display: flex;
+    gap: 0.75em;
+  }
+
+  @media screen and (max-width: 500px) {
+    .navbar {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+    }
+    .card {
+      display: block;
+    }
+    .footer {
+      flex-direction: column;
+      margin-bottom: 1em;
+    }
+  }
 </style>

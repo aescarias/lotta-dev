@@ -1,99 +1,106 @@
 ---
-import BaseSite from "../layouts/BaseSite.astro"
-import ExtLink from "../components/ExtLink.astro"
-import { WEB_TITLE } from "../common"
+import BaseSite from "../layouts/BaseSite.astro";
+import ExtLink from "../components/ExtLink.astro";
+import { WEB_TITLE } from "../common";
 ---
 
-<BaseSite title={ `About ${WEB_TITLE}` } description="A bit about the website and its author">
-    <section id="site">
-        <h1>About this site</h1>
+<BaseSite
+  title={`About ${WEB_TITLE}`}
+  description="A bit about the website and its author"
+>
+  <section id="site">
+    <h1>About this site</h1>
 
-        <p>
-            Lotta Dev is the personal website of <b>Ángel Carias</b>.
-            It also acts as my blog where I mainly write about programming, Python, 
-            projects I do, and other interesting things.
-        </p>
+    <p>
+      Lotta Dev is the personal website of <b>Ángel Carias</b>. It also acts as
+      my blog where I mainly write about programming, Python, projects I do, and
+      other interesting things.
+    </p>
 
-        <p>
-            This website is incredibly simple. It is written in 
-            <ExtLink href="https://astro.build/">Astro</ExtLink>
-            and a bunch of Markdown. It also has an RSS feed for those interested.
-        </p>
-    </section>
+    <p>
+      This website is incredibly simple. It is written in
+      <ExtLink href="https://astro.build/">Astro</ExtLink>
+      and a bunch of Markdown. It also has an RSS feed for those interested.
+    </p>
+  </section>
 
-    <section id="author">
-        <h1>About the author</h1>
+  <section id="author">
+    <h1>About the author</h1>
 
-        <p>
-            I'm <b>Ángel Carias</b>, a Honduran software developer who creates 
-            applications mainly focusing on productivity, file formats, and more. 
-            I usually go by <b>Tekgar</b> on the web.
-        </p>
+    <p>
+      I'm <b>Ángel Carias</b>, a Honduran software developer who creates
+      applications mainly focusing on productivity, file formats, and more. I
+      usually go by <b>Tekgar</b> on the web.
+    </p>
 
-        <ul>
-            <li>
-                🌱 My interests are mainly in programming and technology. 
-                I am also slightly interested in aviation, solving puzzles, and just life in 
-                general.
-            </li>
-            <li>
-                🏓 My first time programming was with Visual Basic .NET in 2015 but 
-                I didn't really do much until I started learning Python sometime in 2019.
-            </li>
-            <li>
-                🏕️ Most of my projects are in Python, but I have also worked with TypeScript
-                and a tiny bit of Rust. I'm currently working on a 
-                <ExtLink href="https://github.com/aescarias/pdfnaut">
-                    PDF library for Python
-                </ExtLink>.
-            </li>
-            <li>
-                🏘️ Astro and Svelte are my web frameworks of choice but I'm also familiar 
-                with Vue.
-            </li>
-        </ul>
-    </section>
-    
-    <section class="contact">
-        <h1>Contact</h1>
+    <ul>
+      <li>
+        🌱 My interests are mainly in programming and technology. I am also
+        slightly interested in aviation, solving puzzles, and just life in
+        general.
+      </li>
+      <li>
+        🏓 My first time programming was with Visual Basic .NET in 2015 but I
+        didn't really do much until I started learning Python sometime in 2019.
+      </li>
+      <li>
+        🏕️ Most of my projects are in Python, but I have also worked with
+        TypeScript and a tiny bit of Rust. I'm currently working on a
+        <ExtLink href="https://github.com/aescarias/pdfnaut">
+          PDF library for Python
+        </ExtLink>.
+      </li>
+      <li>
+        🏘️ Astro and Svelte are my web frameworks of choice but I'm also
+        familiar with Vue.
+      </li>
+    </ul>
+  </section>
 
-        <ul>
-            <li>
-                I'm usually active in the <ExtLink href="https://pythondiscord.com">
-                    Python Discord
-                </ExtLink> where I help people write better 
-                Python! I go by Tekgar over there.
-            </li>
-            <li>
-                For general questions, you can also contact me through my
-                <a href="mailto:lotta.dev@outlook.com">email</a> 
-                (I do not guarantee a response but I will try my best).
-            </li>
-        </ul>
-    </section>
+  <section class="contact">
+    <h1>Contact</h1>
 
-    <section id="legal">
-        <h1>License & Attribution</h1>
+    <ul>
+      <li>
+        I'm usually active at <ExtLink href="https://pythondiscord.com">
+          Python Discord
+        </ExtLink> where I help people write better Python! I go by Tekgar over there.
+      </li>
+      <li>
+        For general questions, you can contact me through my
+        <a href="mailto:lotta.dev@outlook.com">email</a>
+        (I do not guarantee a response but I will try my best).
+      </li>
+    </ul>
+  </section>
 
-        <p>
-            Unless otherwise explicitly stated, all written content and any of its assets
-            (as in images, videos, and illustrations) on this site are provided under
-            the <ExtLink href="https://creativecommons.org/licenses/by/4.0/deed.en">Creative Commons 4.0 Attribution License</ExtLink>.
-            See this site's <ExtLink href="https://github.com/aescarias/lotta-dev?tab=readme-ov-file">README</ExtLink>
-            file for details.
-        </p>
+  <section id="legal">
+    <h1>License & Attribution</h1>
 
-        <p>
-            The source code for this website is available on 
-            <ExtLink href="https://github.com/aescarias/lotta-dev">Github</ExtLink> 
-            and is provided under the MIT License.
-        </p>
+    <p>
+      Unless otherwise explicitly stated, all written content and any of its
+      assets (as in images, videos, and illustrations) on this site are provided
+      under the <ExtLink
+        href="https://creativecommons.org/licenses/by/4.0/deed.en"
+        >Creative Commons 4.0 Attribution License</ExtLink
+      >. See this site's <ExtLink
+        href="https://github.com/aescarias/lotta-dev?tab=readme-ov-file"
+        >README</ExtLink
+      >
+      file for details.
+    </p>
 
-        <p>
-            The icons used on this website are part of 
-            <ExtLink href="https://phosphoricons.com/">Phosphor Icons</ExtLink>,
-            provided under the MIT License. The fonts used are <b>Source Code Pro</b> 
-            and <b>Nunito</b> which are both under the Open Font License.
-        </p>
-    </section>
+    <p>
+      The source code for this website is available on
+      <ExtLink href="https://github.com/aescarias/lotta-dev">Github</ExtLink>
+      and is provided under the MIT License.
+    </p>
+
+    <p>
+      The icons used on this website are part of
+      <ExtLink href="https://phosphoricons.com/">Phosphor Icons</ExtLink>,
+      provided under the MIT License. The fonts used are <b>Source Code Pro</b>
+      and <b>Nunito</b> which are both under the Open Font License.
+    </p>
+  </section>
 </BaseSite>

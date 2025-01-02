@@ -1,30 +1,33 @@
 ---
-import { getCollection } from "astro:content"
-import { WEB_TITLE, sortByLatest } from "../../common"
-import BaseSite from "../../layouts/BaseSite.astro"
+import { getCollection } from "astro:content";
+import { WEB_TITLE, sortByLatest } from "../../common";
+import BaseSite from "../../layouts/BaseSite.astro";
 import BlogEntry from "../../components/BlogEntry.astro";
 
 const posts = await getCollection("posts");
 ---
 
-<BaseSite title="Posts" description={ `A list of all posts available on ${WEB_TITLE}` }>
-    <h2 class="mono">posts</h2>
-    
-    <p>
-        <a href="/posts/random">
-            <i class="ph ph-dice-five"></i> random post
-        </a>
-    </p>
+<BaseSite
+  title="Posts"
+  description={`A list of all posts available on ${WEB_TITLE}`}
+>
+  <h2 class="mono">posts</h2>
 
-    <section class="articles-list">
-        { sortByLatest(posts).map(post => <BlogEntry post={ post } /> )}
-    </section>
+  <p>
+    <a href="/posts/random">
+      <i class="ph ph-dice-five"></i> random post
+    </a>
+  </p>
+
+  <section class="articles-list">
+    {sortByLatest(posts).map((post) => <BlogEntry post={post} />)}
+  </section>
 </BaseSite>
 
 <style>
-    .articles-list {
-        display: flex;
-        flex-direction: column;
-        gap: 1em;
-    }
+  .articles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
 </style>

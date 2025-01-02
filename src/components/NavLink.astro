@@ -1,12 +1,12 @@
 ---
-const pathname = new URL(Astro.request.url).pathname
+const pathname = new URL(Astro.request.url).pathname;
 
 interface Props {
-    href: string
+  href: string;
 }
 const { href } = Astro.props;
 ---
 
-<a class={pathname === href ? "active" : ""} href={ href }>
-    <slot />
+<a class={pathname === href ? "active" : ""} href={href}>
+  <slot />
 </a>

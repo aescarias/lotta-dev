@@ -1,17 +1,21 @@
 ---
 import type { TOCHeading } from "../layouts/PostLayout.astro";
 interface Props {
-    heading: TOCHeading
+  heading: TOCHeading;
 }
 const { heading } = Astro.props;
 ---
 
 <li>
-    <a href={`#${heading.slug}`}>
-        { heading.text }
-    </a>
+  <a href={`#${heading.slug}`}>{heading.text}</a>
 
-    { heading.children.length > 0 && <ul>
-        { heading.children.map(h => <Astro.self heading={ h } />) }
-    </ul> }
+  {
+    heading.children.length > 0 && (
+      <ul>
+        {heading.children.map((h) => (
+          <Astro.self heading={h} />
+        ))}
+      </ul>
+    )
+  }
 </li>
