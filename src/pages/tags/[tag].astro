@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content";
+import BaseSite from "../../layouts/BaseSite.astro";
+import BlogEntry from "../../components/BlogEntry.astro";
+import { WEB_TAGS, sortByLatest } from "../../common";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  const uniqueTags = [...new Set(posts.map((post) => post.data.tags).flat())];
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = posts.filter((post) => post.data.tags.includes(tag));
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+
+const description = WEB_TAGS[tag];
+
+export const prerender = true;
+---
+
+<BaseSite title={`Tag: ${tag}`} {description}>
+  <h2 class="mono">Tag: {tag}</h2>
+
+  <p>
+    {description}
+  </p>
+
+  <section class="tags-list">
+    {sortByLatest(posts).map((post) => <BlogEntry post={post} />)}
+  </section>
+</BaseSite>
+
+<style>
+  .tags-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+  }
+</style>

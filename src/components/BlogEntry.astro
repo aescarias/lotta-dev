@@ -11,11 +11,26 @@ const { post } = Astro.props;
 
 <article class="card post">
   <a href={`/posts/${post.id}`}>{post.data.title}</a>
-  <p class="text-second">
+  <div class="text-second">
     <time datetime={post.data.published.toString()}>
       {format(post.data.published, "MMMM dd, yyyy")}
     </time>
-  </p>
+
+    <span>·</span>
+
+    <ul class="tags">
+      {
+        post.data.tags.map((tag) => (
+          <li>
+            <a class="tag" href={`/tags/${tag}`}>
+              {tag}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
   <p>{post.data.description}</p>
 </article>
 
@@ -29,5 +44,25 @@ const { post } = Astro.props;
   }
   .post p {
     margin: 0;
+  }
+
+  .tags {
+    list-style: none;
+    padding-inline: 0;
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin: 0;
+  }
+
+  .tags .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    color: var(--clr-fg-second);
+  }
+
+  .tags .tag:hover {
+    color: var(--clr-link-active);
   }
 </style>

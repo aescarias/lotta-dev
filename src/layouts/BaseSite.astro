@@ -28,7 +28,7 @@ const { title, description } = Astro.props;
       rel="alternate"
       type="application/rss+xml"
       title={WEB_TITLE}
-      href="/rss.xml"
+      href={new URL("rss.xml", Astro.site)}
     />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -87,6 +87,7 @@ const { title, description } = Astro.props;
 
       <ul>
         <li><NavLink href="/posts">posts</NavLink></li>
+        <li><NavLink href="/tags">tags</NavLink></li>
         <li><NavLink href="/about">about</NavLink></li>
 
         <li>
@@ -326,6 +327,12 @@ const { title, description } = Astro.props;
   .links {
     display: flex;
     gap: 0.75em;
+  }
+
+  .links a {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
   }
 
   @media screen and (max-width: 500px) {

@@ -2,6 +2,8 @@
 title: Why you (probably) shouldn't worry about obfuscation
 description: If you think that obfuscation will solve your issues, it probably won't. 
 published: 2024-08-28T14:15:00-06:00
+tags:
+  - programming
 ---
 
 Sometimes when a person finishes a project and wants to distribute an executable for it, they may not want others to look at their source code be it to deter piracy, to protect secrets, etc.

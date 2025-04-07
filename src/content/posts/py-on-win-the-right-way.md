@@ -3,6 +3,10 @@ title: Installing Python on Windows, the right way
 description: Installing Python on Windows without the troubles.
 published: 2024-08-14T14:27:00-06:00
 updated: 2024-08-26T14:40:00-06:00
+tags:
+  - programming
+  - python
+  - windows
 ---
 
 To use Python, you need to install a Python interpreter that runs your code. This post should help you get ready with Python on Windows the right way.
@@ -92,13 +96,14 @@ After clicking Close, you can do as instructed and search for Python in your sta
 
 Because the Python installer can fail due to a plethora of reasons (permissions, missing or corrupted files, partially installed releases, etc), there's no simple answer for fixing. There are however a few things you can try to diagnose why it fails:
 
-- The installer should leave a log file with information about what caused the install to fail. Search for `0x8` within the log and lookup those errors through [this website](<https://james.darpinian.com/decoder/>) (they look something like this example: `0x80070641`). Above these `0x8` strings, you will also find the component that produced this error.
-- The installer also leaves more verbose logs for each component in the `Temp` folder. Search for `WixBundleLog_` in the log file. The location of the log file should be in the same line.
+- The installer should leave a log file with information about what caused the install to fail. Search for `0x8` within the log and lookup these errors through [this website](https://james.darpinian.com/decoder/) (they look similar to this example: `0x80070641`). Above these `0x8` strings, you will also find the component that produced this error.
+- The installer also leaves more verbose logs for each component in the `%Temp%` folder. To find them, search for `WixBundleLog_` in the main log file. The location of the component's log file should be in the same line.
 - If you see "This installation is forbidden by your system policy", you might need to run the installer as administrator.
 - If you see "A newer version of Python \[x\] is already installed", this means that the installer has found traces of a newer release on your PC. Make sure that you have uninstalled these properly (in some cases, including the launcher) and try again. To make sure, run a specialized application like [BCUninstaller](https://www.bcuninstaller.com/) that adequately removes leftovers from uninstalls.
 - If you see "The network resource is unavailable", this usually means that the installer was unable to extract that component. Remove any leftovers as instructed above and try again.
 - If you see a more generic error like "The user cancelled the installation" or "Unrecoverable error during install", this can hint at multiple factors:
   - Improperly uninstalled versions of Python: follow as instructed above.
+  - User account issues: if your system has multiple user accounts, it's possible that you installed Python for a specific user and are uninstalling from a different one. Make sure you have the correct user permissions to reinstall Python.
   - Permission issues: run as admin or uncheck the "Install launcher for all users" option. It is also possible your antivirus software is interfering with the installer so disabling it temporarily may work.
   - An issue with the Windows installer service: run [this troubleshooter](http://support.microsoft.com/mats/program_install_and_uninstall) from Microsoft and try again.
 

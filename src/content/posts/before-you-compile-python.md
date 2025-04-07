@@ -3,6 +3,9 @@ title: Before you compile Python...
 description: The complicated reality of creating a Python executable
 published: 2023-12-27T11:23:06-06:00
 updated: 2024-07-27T21:00:12-06:00
+tags:
+  - programming
+  - python
 ---
 
 There are cases where you may want to distribute a project you've made in Python. Many people will resort to creating an executable because it's easier for them and easier for an user.
@@ -56,7 +59,7 @@ If your users are not tech savvy, you can easily create an installer through Inn
 
 ### Otherwise
 
-If you are starting a project and distribution is a priority, consider <u>not using Python at all</u> (at least, not yet). Python is great for server-side software but the difficulty of distributing Python can make it undesirable for developing client-side software. There are many languages, however, like C++, C#, and Rust, that have compilation in mind and have solved most of the challenges pointed above.
+If you are starting a project and distribution is a priority, consider **not using Python at all** (at least, not yet). Python is great for server-side software but the difficulty of distributing Python can make it undesirable for developing client-side software. There are many languages, however, like C++, C#, and Rust, that have compilation in mind and have solved most of the challenges pointed above.
 
 ## Conclusion
 

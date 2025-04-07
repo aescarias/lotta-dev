@@ -2,6 +2,8 @@
 title: Using the cd command on Windows
 description: Yes, the "change directory" command. Trust me, you'll learn something.
 published: 2025-01-02T13:50:00-06:00
+tags:
+  - windows
 ---
 
 > This article does not apply to the `cd` command on Powershell which is an alias for `Set-Location` and which behaves differently. This is strictly for `cd.exe`.

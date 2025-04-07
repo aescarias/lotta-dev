@@ -1,7 +1,7 @@
 {
   "name": "lotta-dev",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -11,11 +11,11 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/cloudflare": "^12.1.0",
-    "@astrojs/rss": "^4.0.10",
+    "@astrojs/cloudflare": "^12.4.0",
+    "@astrojs/rss": "^4.0.11",
     "@fontsource-variable/nunito-sans": "^5.0.9",
     "@fontsource-variable/source-code-pro": "^5.0.17",
-    "astro": "^5.1.1",
+    "astro": "^5.6.1",
     "date-fns": "^3.0.6",
     "marked": "^11.1.0",
     "remark-sectionize": "^2.0.0",

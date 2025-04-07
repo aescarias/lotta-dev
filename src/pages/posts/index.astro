@@ -11,13 +11,13 @@ const posts = await getCollection("posts");
   title="Posts"
   description={`A list of all posts available on ${WEB_TITLE}`}
 >
-  <h2 class="mono">posts</h2>
+  <h2 class="heading mono">
+    <span>posts</span>
 
-  <p>
-    <a href="/posts/random">
+    <a class="random-post" href="/posts/random">
       <i class="ph ph-dice-five"></i> random post
     </a>
-  </p>
+  </h2>
 
   <section class="articles-list">
     {sortByLatest(posts).map((post) => <BlogEntry post={post} />)}
@@ -29,5 +29,19 @@ const posts = await getCollection("posts");
     display: flex;
     flex-direction: column;
     gap: 1em;
+  }
+  .heading {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .random-post {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: normal;
   }
 </style>

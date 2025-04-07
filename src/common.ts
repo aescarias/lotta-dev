@@ -4,6 +4,11 @@ import { type CollectionEntry } from "astro:content";
 export const WEB_TITLE = "lotta dev";
 export const WEB_DESCRIPTION =
   "The personal programming website of Angel Carias.";
+export const WEB_TAGS: Record<string, string> = {
+  python: "Bits about the Python programming language.",
+  programming: "General programming tidbits.",
+  windows: "Everything to do with the Windows operating system.",
+};
 
 /* Everything else */
 export function sortByLatest(posts: CollectionEntry<"posts">[]) {

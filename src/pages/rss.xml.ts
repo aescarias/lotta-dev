@@ -27,7 +27,8 @@ export async function GET(context: APIContext) {
   const rssItems = posts.map(async (post) => ({
     title: post.data.title,
     link: `/posts/${post.id}/`,
-    pubDate: post.data.published,
+    pubDate: post.data.published,    
+    categories: post.data.tags,
     content: sanitizeHtml(await marked.parse(post.body || ""), {
       allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
     }),
@@ -40,7 +41,7 @@ export async function GET(context: APIContext) {
     site: context.site || new URL("https://lotta.pages.dev"),
     stylesheet: "/rss/feed.xsl",
     items: await Promise.all(rssItems),
-    customData: "<language>en</language>",
+    customData: "<language>en-us</language>",
   });
 
   return new Response(beautifyXML(doc), {

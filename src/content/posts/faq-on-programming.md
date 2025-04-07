@@ -3,6 +3,8 @@ title: An FAQ on Programming
 description: A list of questions I tend to receive while helping others. 
 published: 2024-06-10T22:08:00-06:00
 updated: 2024-07-04T18:58:56-06:00
+tags:
+  - programming
 ---
 
 ## What is programming?

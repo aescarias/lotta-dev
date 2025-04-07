@@ -67,7 +67,7 @@ const { frontmatter, readingTime, headings } = Astro.props;
 
 <BaseSite title={frontmatter.title} description={frontmatter.description}>
   <h1 class="blog-title">{frontmatter.title}</h1>
-  <p class="mono text-second">
+  <div class="blog-meta mono text-second">
     <span>
       <i class="ph ph-bold ph-calendar" aria-label="published"></i>
       <time datetime={frontmatter.published.toString()}>
@@ -84,9 +84,23 @@ const { frontmatter, readingTime, headings } = Astro.props;
         </span>
       ) : undefined
     }
-    <i class="ph ph-bold ph-clock" aria-label="reading time"></i>
-    {readingTime.toFixed(2)} minute read
-  </p>
+    <span>
+      <i class="ph ph-bold ph-clock" aria-label="reading time"></i>
+      {readingTime.toFixed(2)} minute read
+    </span>
+    <ul class="tags">
+      <i class="ph ph-bold ph-tag" aria-label="tags"></i>
+      {
+        frontmatter.tags.map((tag) => (
+          <li>
+            <a class="tag" href={`/tags/${tag}`}>
+              {tag}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 
   <p class="mono text-second">
     // {frontmatter.description}
@@ -109,16 +123,26 @@ const { frontmatter, readingTime, headings } = Astro.props;
   .blog-title {
     font-size: 2rem;
   }
+
+  .blog-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75em;
+    align-items: center;
+  }
+
   .blog-wrapper {
     display: grid;
     gap: 2em;
     grid-template-columns: 4fr 1fr;
   }
+
   .blog-toc {
     position: sticky;
     top: 0;
     align-self: start;
   }
+
   @media screen and (max-width: 800px) {
     .blog-toc {
       display: none;
@@ -126,6 +150,27 @@ const { frontmatter, readingTime, headings } = Astro.props;
     .blog-wrapper {
       display: block;
     }
+  }
+
+  .tags {
+    list-style: none;
+    padding-inline: 0;
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .tags .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    color: var(--clr-fg-second);
+  }
+
+  .tags .tag:hover {
+    color: var(--clr-link-active);
   }
 </style>
 
@@ -159,7 +204,7 @@ const { frontmatter, readingTime, headings } = Astro.props;
   }
   .blog-content :not(pre) > code {
     background-color: var(--clr-bg-second);
-    padding: 0.15em;
+    padding: 0 0.2em;
   }
   .blog-content img {
     display: block;

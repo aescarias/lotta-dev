@@ -112,7 +112,7 @@ const projects = [
         .map((post) => <BlogEntry post={post} />)
     }
 
-    <a style="text-align: right" href="/posts">
+    <a class="all-posts" href="/posts">
       <i class="ph ph-arrow-right"></i> all posts
     </a>
   </section>
@@ -177,6 +177,12 @@ const projects = [
   }
   .articles > h2 {
     margin-bottom: 0;
+  }
+  .all-posts {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+    justify-content: end;
   }
 
   @media screen and (max-width: 1090px) {

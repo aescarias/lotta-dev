@@ -100,6 +100,15 @@
                 color: var(--clr-fg-second);
             }
 
+            .articles .post .tags {
+                color: var(--clr-fg-second);
+                list-style: none;
+                padding-inline: 0;
+                display: flex;
+                gap: 0.75em;
+                align-items: center;
+            }
+
             @media screen and (max-width: 500px) {
                 .header {
                     display: block;
@@ -153,6 +162,12 @@
                                         <xsl:value-of select="title" />
                                     </a>
                                 </h3>
+
+                                <ul class="tags">
+                                    <xsl:for-each select="category">
+                                        <li><xsl:value-of select="text()" /></li>
+                                    </xsl:for-each>
+                                </ul>
 
                                 <p>
                                     <xsl:value-of select="description" />
