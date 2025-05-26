@@ -1,8 +1,9 @@
 ---
-title: Notes on Qt Designer and Python UIs.
+title: Notes on Qt Designer and Python UIs
 description: What is Qt Designer, should you use it, and how to use it.
 published: 2025-05-26T17:30:00-06:00
 tags: 
+  - programming
   - python
   - qt
 ---
