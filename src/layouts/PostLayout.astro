@@ -43,7 +43,7 @@ const { frontmatter, readingTime, headings } = Astro.props;
           if (!heading) return;
 
           const anchor = document.querySelector<HTMLAnchorElement>(
-            `a[href="#${heading.id}"]`
+            `.blog-toc a[href="#${heading.id}"]`
           );
           if (!anchor) return;
 
