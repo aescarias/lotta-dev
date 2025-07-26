@@ -103,7 +103,7 @@ const { frontmatter, readingTime, headings } = Astro.props;
 
 <BaseSite title={frontmatter.title} description={frontmatter.description}>
   <h1 class="blog-title">{frontmatter.title}</h1>
-  <div class="blog-meta mono text-second">
+  <div class="blog-meta mono subtext">
     <span>
       <i class="ph ph-bold ph-calendar" aria-label="published"></i>
       <time datetime={frontmatter.published.toString()}>
@@ -138,8 +138,9 @@ const { frontmatter, readingTime, headings } = Astro.props;
     </ul>
   </div>
 
-  <p class="mono text-second">
-    // {frontmatter.description}
+  <p class="mono subtext">
+    <span aria-hidden="true">//</span>
+    {frontmatter.description}
   </p>
 
   <section class="blog-wrapper">
@@ -211,6 +212,16 @@ const { frontmatter, readingTime, headings } = Astro.props;
 </style>
 
 <style is:global>
+  /* These styles are invoked via Javascript or plugins */
+  .blog-content :is(h1, h2, h3, h4, h5, h6) a {
+    display: none;
+  }
+
+  .blog-content :is(h1, h2, h3, h4, h5, h6):hover a {
+    display: inline-block;
+    margin-inline: 0.25em;
+  }
+
   .copy-code {
     position: absolute;
     top: 0;

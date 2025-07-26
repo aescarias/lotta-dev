@@ -18,6 +18,8 @@
     "astro": "^5.8.0",
     "date-fns": "^3.0.6",
     "marked": "^11.1.0",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-slug": "^6.0.0",
     "remark-sectionize": "^2.0.0",
     "sanitize-html": "^2.11.0",
     "typescript": "^5.3.3"

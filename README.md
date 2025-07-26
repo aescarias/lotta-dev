@@ -1,6 +1,6 @@
 # lotta dev
 
-The code powering my website available at <https://lotta.pages.dev>.
+The source code powering <https://lotta.pages.dev>.
 
 ## License
 

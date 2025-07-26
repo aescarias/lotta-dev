@@ -50,38 +50,6 @@ const { title, description } = Astro.props;
       </style>
     </noscript>
 
-    <script is:inline>
-      function getThemeSetting() {
-        return localStorage.getItem("theme") || "system";
-      }
-
-      function setThemeSetting(theme) {
-        localStorage.setItem("theme", theme);
-      }
-
-      function getAppliedTheme() {
-        return document.querySelector("html")?.getAttribute("data-theme");
-      }
-
-      function applyTheme(theme) {
-        document.querySelector("html")?.setAttribute("data-theme", theme);
-      }
-
-      const prefersLight = window.matchMedia("(prefers-color-scheme: light)");
-      const savedTheme = getThemeSetting();
-
-      prefersLight.onchange = (event) => {
-        if (getThemeSetting() !== "system") return;
-        applyTheme(event.matches ? "light" : "dark");
-      };
-
-      if (savedTheme === "system") {
-        applyTheme(prefersLight.matches ? "light" : "dark");
-      } else {
-        applyTheme(savedTheme);
-      }
-    </script>
-
     <nav class="navbar">
       <h1 class="brand"><a href="/">lotta dev</a></h1>
 
@@ -131,6 +99,36 @@ const { title, description } = Astro.props;
 </html>
 
 <script is:inline defer>
+  function getThemeSetting() {
+    return localStorage.getItem("theme") || "system";
+  }
+
+  function setThemeSetting(theme) {
+    localStorage.setItem("theme", theme);
+  }
+
+  function getAppliedTheme() {
+    return document.querySelector("html")?.getAttribute("data-theme");
+  }
+
+  function applyTheme(theme) {
+    document.querySelector("html")?.setAttribute("data-theme", theme);
+  }
+
+  const prefersLight = window.matchMedia("(prefers-color-scheme: light)");
+  const savedTheme = getThemeSetting();
+
+  prefersLight.onchange = (event) => {
+    if (getThemeSetting() !== "system") return;
+    applyTheme(event.matches ? "light" : "dark");
+  };
+
+  if (savedTheme === "system") {
+    applyTheme(prefersLight.matches ? "light" : "dark");
+  } else {
+    applyTheme(savedTheme);
+  }
+
   function updateToggle() {
     if (getAppliedTheme() === "dark") {
       document.querySelector("[data-theme-toggle] [data-dark]").style.display =
@@ -168,8 +166,8 @@ const { title, description } = Astro.props;
 
 <style is:global>
   /* 
-  Defaults / base styles 
-	Partly based on Josh's CSS Reset: https://www.joshwcomeau.com/css/custom-css-reset/ 
+    Defaults / base styles partly based on Josh's CSS Reset: 
+    https://www.joshwcomeau.com/css/custom-css-reset/ 
   */
 
   *,
@@ -219,8 +217,8 @@ const { title, description } = Astro.props;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
 
-    max-width: clamp(65vw, 70vw, 75vw);
-    margin: auto;
+    max-width: 80vw;
+    margin: 1rem auto;
   }
 
   img,
@@ -269,7 +267,7 @@ const { title, description } = Astro.props;
     text-align: center;
   }
 
-  .text-second {
+  .subtext {
     color: var(--clr-fg-second);
   }
 
@@ -278,6 +276,10 @@ const { title, description } = Astro.props;
     text-decoration: none;
     transition: color 0.5s;
     display: inline-block;
+  }
+
+  .navbar .brand {
+    font-size: 1.5rem;
   }
 
   .navbar .brand a {
@@ -307,16 +309,6 @@ const { title, description } = Astro.props;
     padding: 0;
   }
 
-  /* Components */
-  .card {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    padding: 1em;
-    border-radius: 15px;
-    background-color: var(--clr-card);
-  }
-
   /* Footer */
   .footer {
     display: flex;
@@ -341,9 +333,6 @@ const { title, description } = Astro.props;
       justify-content: center;
       align-items: center;
       gap: 0;
-    }
-    .card {
-      display: block;
     }
     .footer {
       flex-direction: column;

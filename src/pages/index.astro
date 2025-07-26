@@ -14,27 +14,22 @@ const projects = [
     docs: "https://pdfnaut.rtfd.io",
   },
   {
-    title: "Python on Windows Troubleshooter",
-    description: "Look for traces of Python installs on Windows",
-    repository: "https://github.com/aescarias/pywintrbl",
-  },
-  {
-    title: "Mite Reader",
-    description: "A really simple RSS/Atom reader",
-    repository: "https://github.com/Axleware/mite",
-  },
-  {
     title: "Atto Weather",
     description: "A weather app written in Python using Qt",
     repository: "https://github.com/aescarias/atto-weather",
+  },
+  {
+    title: "Python on Windows Troubleshooter",
+    description: "Look for traces of Python installs on Windows",
+    repository: "https://github.com/aescarias/pywintrbl",
   },
 ];
 ---
 
 <BaseSite title={WEB_TITLE} description={WEB_DESCRIPTION}>
-  <section id="about" class="card about">
+  <section id="about" class="about-card">
     <div class="about-details">
-      <h2>I'm a fellow citizen of the web 🏓</h2>
+      <h2 class="mono">I'm a fellow citizen of the web 🏓</h2>
 
       <p>
         I'm Ángel Carias, a software developer that loves tinkering with APIs
@@ -48,7 +43,7 @@ const projects = [
           target="_blank"
           rel="noopener noreferrer"
         >
-          <i class="ph ph-github-logo"></i> aescarias
+          <i class="ph ph-github-logo"></i> github
         </a>
         <a class="link-button" href="mailto:lotta.dev@outlook.com">
           <i class="ph ph-envelope-simple"></i> email
@@ -69,10 +64,11 @@ const projects = [
     <div class="project-grid">
       {
         projects.map((proj) => (
-          <article class="card project">
-            <h3>{proj.title}</h3>
-
-            <p>{proj.description}</p>
+          <article class="project-card">
+            <div class="article-details">
+              <h3>{proj.title}</h3>
+              <p>{proj.description}</p>
+            </div>
 
             <div class="links">
               {proj.repository ? (
@@ -138,13 +134,19 @@ const projects = [
 </style>
 
 <style>
-  .about {
+  .about-card {
+    display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
   }
+
   .about-details h2 {
     margin: 0;
   }
-  .about .avatar {
+
+  .about-card .avatar {
     border-radius: 50%;
     object-fit: cover;
     object-position: center;
@@ -152,32 +154,42 @@ const projects = [
   }
 
   .project-grid {
-    padding: 0;
-    background: transparent;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 1em;
   }
-  .project-grid h3,
-  .project-grid p {
-    margin-block: 0.5em;
-  }
-  .project-grid h3 {
-    margin-top: 0;
-  }
-  .project {
-    gap: 0;
+
+  .project-card {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 1em;
+    gap: 0.75em 1.5em;
     background-color: var(--clr-card);
+    border-radius: 5px;
   }
+
+  .project-card p,
+  .project-card h3 {
+    margin: 0;
+    font-size: inherit;
+  }
+
+  .project-card p {
+    flex-grow: 1;
+  }
+
   .articles {
     display: flex;
     flex-direction: column;
     gap: 1em;
   }
+
   .articles > h2 {
     margin-bottom: 0;
   }
+
   .all-posts {
     display: flex;
     gap: 0.5em;
@@ -192,8 +204,9 @@ const projects = [
       gap: 1em;
     }
   }
+
   @media screen and (max-width: 800px) {
-    .about {
+    .about-card {
       display: flex;
       flex-direction: column;
       gap: 1em;
