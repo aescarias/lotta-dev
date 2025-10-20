@@ -10,12 +10,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
-    "@astrojs/cloudflare": "^12.5.3",
-    "@astrojs/rss": "^4.0.11",
+    "@astrojs/check": "^0.9.5",
+    "@astrojs/cloudflare": "^12.6.10",
+    "@astrojs/rss": "^4.0.12",
     "@fontsource-variable/nunito-sans": "^5.0.9",
     "@fontsource-variable/source-code-pro": "^5.0.17",
-    "astro": "^5.8.0",
+    "astro": "^5.14.7",
     "date-fns": "^3.0.6",
     "marked": "^11.1.0",
     "rehype-autolink-headings": "^7.1.0",

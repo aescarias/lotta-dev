@@ -23,6 +23,11 @@ const projects = [
     description: "Look for traces of Python installs on Windows",
     repository: "https://github.com/aescarias/pywintrbl",
   },
+  {
+    title: "BinID",
+    description: "Binary identification software written in Go",
+    repository: "https://github.com/aescarias/binid",
+  },
 ];
 ---
 
@@ -65,7 +70,7 @@ const projects = [
       {
         projects.map((proj) => (
           <article class="project-card">
-            <div class="article-details">
+            <div class="project-details">
               <h3>{proj.title}</h3>
               <p>{proj.description}</p>
             </div>

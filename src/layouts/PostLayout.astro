@@ -127,7 +127,7 @@ const { frontmatter, readingTime, headings } = Astro.props;
     <ul class="tags">
       <i class="ph ph-bold ph-tag" aria-label="tags"></i>
       {
-        frontmatter.tags.map((tag) => (
+        frontmatter.tags.map((tag: string) => (
           <li>
             <a class="tag" href={`/tags/${tag}`}>
               {tag}
@@ -213,11 +213,11 @@ const { frontmatter, readingTime, headings } = Astro.props;
 
 <style is:global>
   /* These styles are invoked via Javascript or plugins */
-  .blog-content :is(h1, h2, h3, h4, h5, h6) a {
+  .blog-content :is(h1, h2, h3, h4, h5, h6) a[aria-hidden="true"] {
     display: none;
   }
 
-  .blog-content :is(h1, h2, h3, h4, h5, h6):hover a {
+  .blog-content :is(h1, h2, h3, h4, h5, h6):hover a[aria-hidden="true"] {
     display: inline-block;
     margin-inline: 0.25em;
   }
