@@ -5,6 +5,7 @@ published: 2025-10-24T19:40:00-06:00
 tags:
 - programming
 - python
+- windows
 ---
 
 Python 3.14 has introduced many new features including template strings, deferred evaluation of annotations, and improvements to error messages, among other things. On the Windows side, the Python team has improved the Python Launcher (also known as `py`) by adding features that should hopefully make it easier for users to manage and install Python versions on Windows.

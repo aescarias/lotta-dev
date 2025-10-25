@@ -2,12 +2,14 @@
 title: Installing Python on Windows, the right way
 description: Installing Python on Windows without the troubles.
 published: 2024-08-14T14:27:00-06:00
-updated: 2025-05-01T09:40:00-06:00
+updated: 2025-10-24T22:00:00-06:00
 tags:
   - programming
   - python
   - windows
 ---
+
+> As of October 2025, the preferred method of obtaining Python on Windows is the Python Install Manager which streamlines the installation process by downloading Python on the go and extracting it onto your device. [You can read about PyManager here](/posts/pymanager/).
 
 Python is an easy to use yet powerful language suited for a wide variety of applications including data science, automation, backends, and more. As any other language, to use its features in the most effective way, you will need to install a suitable runtime for running your code.
 
