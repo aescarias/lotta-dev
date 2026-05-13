@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, fontProviders } from 'astro/config';
 import cloudflare from "@astrojs/cloudflare";
 import sectionize from "remark-sectionize"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
@@ -9,6 +9,23 @@ export default defineConfig({
   site: "https://lotta.pages.dev",
   output: "server",
   adapter: cloudflare(),
+  fonts: [
+    {
+      provider: fontProviders.fontsource(),
+      name: "Nunito Sans",
+      cssVariable: "--font-nunito-sans",
+      fallbacks: ["sans-serif"],
+      styles: ["normal"]
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: "Source Code Pro",
+      cssVariable: "--font-source-code-pro",
+      fallbacks: ["monospace"],
+      styles: ["normal"],
+      weights: [500, 600]
+    }
+  ],
   markdown: {
     remarkPlugins: [sectionize],
     rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, {

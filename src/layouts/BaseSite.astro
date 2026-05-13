@@ -1,6 +1,5 @@
 ---
-import "@fontsource-variable/nunito-sans";
-import "@fontsource-variable/source-code-pro";
+import { Font } from "astro:assets";
 import { WEB_TITLE } from "../common";
 import NavLink from "../components/NavLink.astro";
 
@@ -37,6 +36,9 @@ const { title, description } = Astro.props;
       type="text/css"
       href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css"
     />
+
+    <Font cssVariable="--font-nunito-sans" />
+    <Font cssVariable="--font-source-code-pro" />
 
     <title>{title}</title>
   </head>
@@ -208,7 +210,7 @@ const { title, description } = Astro.props;
 
   body {
     padding: 0;
-    font-family: "Nunito Sans Variable", sans-serif;
+    font-family: var(--font-nunito-sans);
     font-size: 1.2rem;
     line-height: 1.5;
     color: var(--clr-fg);
@@ -234,7 +236,7 @@ const { title, description } = Astro.props;
   pre,
   code,
   .mono {
-    font-family: "Source Code Pro Variable", monospace;
+    font-family: var(--font-source-code-pro);
   }
 
   p,
