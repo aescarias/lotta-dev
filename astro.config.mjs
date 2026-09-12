@@ -7,7 +7,9 @@ import { hastAutolinkHeadings, mdastSectionize } from './src/plugins';
 export default defineConfig({
   site: "https://lotta.pages.dev",
   output: "server",
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    prerenderEnvironment: "node"
+  }),
   fonts: [
     {
       provider: fontProviders.fontsource(),
