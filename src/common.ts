@@ -8,13 +8,14 @@ export const WEB_TAGS: Record<string, string> = {
   python: "Bits about the Python programming language",
   qt: "Articles relating to the Qt framework",
   windows: "Everything to do with the Windows operating system",
+  pdf: "Notes on Adobe's Portable Document Format (PDF)",
 };
 
 /* Everything else */
 export function sortByLatest(posts: CollectionEntry<"posts">[]) {
   return posts.toSorted(
     (first, second) =>
-      second.data.published.getTime() - first.data.published.getTime()
+      second.data.published.getTime() - first.data.published.getTime(),
   );
 }
 

@@ -1,6 +1,9 @@
 # build output
 dist/
 
+# cache
+.wrangler/
+
 # generated types
 .astro/
 

@@ -59,8 +59,7 @@ const { title, description } = Astro.props;
         <li><NavLink href="/posts">posts</NavLink></li>
         <li><NavLink href="/tags">tags</NavLink></li>
         <li><NavLink href="/about">about</NavLink></li>
-
-        <li>
+        <li class="buttons">
           <button data-theme-toggle title="Toggle theme">
             <i data-light class="ph ph-sun"></i>
             <i data-dark class="ph ph-moon"></i>
@@ -308,6 +307,11 @@ const { title, description } = Astro.props;
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+
+  .navbar ul .buttons {
+    display: flex;
+    gap: 0.5em;
   }
 
   /* Footer */

@@ -76,7 +76,7 @@ const projects = [
             </div>
 
             <div class="links">
-              {proj.repository ? (
+              {proj.repository && (
                 <a
                   class="link-button"
                   href={proj.repository}
@@ -85,9 +85,9 @@ const projects = [
                 >
                   <i class="ph ph-github-logo" /> github
                 </a>
-              ) : undefined}
+              )}
 
-              {proj.docs ? (
+              {proj.docs && (
                 <a
                   class="link-button"
                   href={proj.docs}
@@ -96,7 +96,7 @@ const projects = [
                 >
                   <i class="ph ph-book-open-text" /> docs
                 </a>
-              ) : undefined}
+              )}
             </div>
           </article>
         ))

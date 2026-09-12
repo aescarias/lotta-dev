@@ -11,7 +11,7 @@ const { post } = Astro.props;
 
 <article class="post">
   <a href={`/posts/${post.id}`}>{post.data.title}</a>
-  <div class="subtext">
+  <div class="post-meta subtext">
     <time datetime={post.data.published.toString()}>
       {format(post.data.published, "MMMM dd, yyyy")}
     </time>
@@ -48,6 +48,13 @@ const { post } = Astro.props;
 
   .post p {
     margin: 0;
+  }
+
+  .post-meta {
+    display: flex;
+    gap: 0.5em;
+    flex-wrap: wrap;
+    align-items: center;
   }
 
   .tags {

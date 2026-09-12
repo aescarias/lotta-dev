@@ -104,42 +104,44 @@ const { frontmatter, readingTime, headings } = Astro.props;
 <BaseSite title={frontmatter.title} description={frontmatter.description}>
   <h1 class="blog-title">{frontmatter.title}</h1>
   <div class="blog-meta mono subtext">
-    <span>
+    <span class="blog-meta-item">
       <i class="ph ph-bold ph-calendar" aria-label="published"></i>
       <time datetime={frontmatter.published.toString()}>
         {format(frontmatter.published, "EEEE, MMMM dd, yyyy")}
       </time>
     </span>
     {
-      frontmatter.updated ? (
-        <span>
+      frontmatter.updated && (
+        <span class="blog-meta-item">
           <i class="ph ph-bold ph-note-pencil" aria-label="last updated" />
           <time datetime={frontmatter.updated.toString()}>
             {format(frontmatter.updated, "MMMM dd, yyyy")}
           </time>
         </span>
-      ) : undefined
+      )
     }
-    <span>
+    <span class="blog-meta-item">
       <i class="ph ph-bold ph-clock" aria-label="reading time"></i>
       {readingTime.toFixed(2)} minute read
     </span>
-    <ul class="tags">
+    <span class="blog-meta-item">
       <i class="ph ph-bold ph-tag" aria-label="tags"></i>
-      {
-        frontmatter.tags.map((tag: string) => (
-          <li>
-            <a class="tag" href={`/tags/${tag}`}>
-              {tag}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+      <ul class="tags">
+        {
+          frontmatter.tags.map((tag: string) => (
+            <li>
+              <a class="tag" href={`/tags/${tag}`}>
+                {tag}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </span>
   </div>
 
   <p class="mono subtext">
-    <span aria-hidden="true">//</span>
+    <span aria-hidden="true">{"// "}</span>
     {frontmatter.description}
   </p>
 
@@ -165,6 +167,13 @@ const { frontmatter, readingTime, headings } = Astro.props;
     display: flex;
     flex-wrap: wrap;
     gap: 0.75em;
+    align-items: center;
+  }
+
+  .blog-meta-item {
+    display: inline-flex;
+    flex-wrap: wrap;
+    column-gap: 0.5em;
     align-items: center;
   }
 
@@ -195,7 +204,7 @@ const { frontmatter, readingTime, headings } = Astro.props;
     display: inline-flex;
     align-items: center;
     flex-wrap: wrap;
-    column-gap: 0.75rem;
+    column-gap: 0.75em;
     margin: 0;
   }
 
@@ -261,6 +270,7 @@ const { frontmatter, readingTime, headings } = Astro.props;
     margin-inline: 0.4em;
   }
   .blog-content p {
+    hyphens: auto;
     text-align: justify;
   }
   .blog-content pre {

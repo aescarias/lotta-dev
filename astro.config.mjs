@@ -1,8 +1,7 @@
 import { defineConfig, fontProviders } from 'astro/config';
 import cloudflare from "@astrojs/cloudflare";
-import sectionize from "remark-sectionize"
-import rehypeAutolinkHeadings from "rehype-autolink-headings"
-import rehypeSlug from "rehype-slug"
+import { satteri, satteriHeadingIdsPlugin } from "@astrojs/markdown-satteri"
+import { hastAutolinkHeadings, mdastSectionize } from './src/plugins';
 
 // https://astro.build/config
 export default defineConfig({
@@ -26,17 +25,24 @@ export default defineConfig({
       weights: [500, 600]
     }
   ],
+  compressHTML: true,
   markdown: {
-    remarkPlugins: [sectionize],
-    rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, {
-      behavior: "append", content: [
-        {
-          type: 'element',
-          tagName: 'i',
-          properties: { className: ['ph ph-link'] }
-        }
-      ]
-    }]],
+    processor: satteri({
+      mdastPlugins: [mdastSectionize()],
+      hastPlugins: [
+        satteriHeadingIdsPlugin(),
+        hastAutolinkHeadings({
+          behavior: "append",
+          content: [
+            {
+              type: "element",
+              tagName: "i",
+              properties: { className: ['ph ph-link'] }
+            }
+          ]
+        })
+      ],
+    }),
     shikiConfig: {
       themes: {
         light: "vitesse-light",
