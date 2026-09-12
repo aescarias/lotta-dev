@@ -1,15 +1,11 @@
 import { defineConfig, fontProviders } from 'astro/config';
-import cloudflare from "@astrojs/cloudflare";
 import { satteri, satteriHeadingIdsPlugin } from "@astrojs/markdown-satteri"
 import { hastAutolinkHeadings, mdastSectionize } from './src/plugins';
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://lotta.pages.dev",
-  output: "server",
-  adapter: cloudflare({
-    prerenderEnvironment: "node"
-  }),
+  output: "static",
   fonts: [
     {
       provider: fontProviders.fontsource(),
